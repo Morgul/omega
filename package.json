@@ -1,0 +1,24 @@
+{
+    "name": "omega-node",
+    "version": "0.0.1",
+    "description": "A web application framework based on socket.io and angularjs.",
+    "dependencies": {
+        "node-static": "0.6.7",
+        "socket.io": "0.9.11",
+        "router": "0.6.2",
+        "swig": "latest"
+    },
+    "main": "omega.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": "",
+    "keywords": [
+        "node",
+        "socket.io",
+        "angularjs",
+        "rest"
+    ],
+    "author": "Christopher S. Case <chris.case@g33xnexus.com>",
+    "license": "MIT"
+}
