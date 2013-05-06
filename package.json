@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "description": "A web application framework based on socket.io and angularjs.",
     "dependencies": {
-        "node-static": "0.6.7",
+        "ecstatic": "0.4.2",
         "socket.io": "0.9.11",
         "router": "0.6.2",
         "swig": "latest"

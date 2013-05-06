@@ -8,6 +8,10 @@ var app = require('omega-node').app;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
+app.router.addRoutes([
+    ['/', {GET: function(){}}]
+]);
+
 // Start the omega app.
 app.listen();
 
