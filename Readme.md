@@ -66,7 +66,7 @@ with omega:
 ```javascript
 
 var app = require('omega-node').app;
-var controlelrs = require('./controllers');
+var controllers = require('./controllers');
 
 app.router.add({path: '/', get: controllers.index});
 
@@ -77,7 +77,7 @@ It also supports adding multiple paths, with multiple verbs at once:
 ```javascript
 
 var app = require('omega-node').app;
-var controlelrs = require('./controllers;);
+var controllers = require('./controllers');
 
 app.router.add([
     {
