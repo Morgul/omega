@@ -13,9 +13,9 @@ var omega = require('../omega');
 
 vows.describe("Omega")
     .addBatch({
-        'The omega module':
+        'The `omega.js` module':
         {
-            'has an `app` propety':
+            'has an `app` property':
             {
                 topic: omega.app,
                 'that is defined': function(topic)
