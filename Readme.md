@@ -10,7 +10,7 @@ A basic Omega application looks like this:
 var path = require('path');
 var app = require('omega-node').app;
 
-app.static.add({url: '/static', path: path.resolve(path.join(_dirname, 'static'))});
+app.static.add({url: '/static', path: path.resolve(path.join(__dirname, 'static'))});
 
 // Start the omega app.
 app.listen();
@@ -38,7 +38,7 @@ var app = require('omega-node').app;
 app.static.add([
     {
         url: '/static',
-        path: path.resolve(path.join(_dirname, 'static'))
+        path: path.resolve(path.join(__dirname, 'static'))
     },
     {
         url: '/images',
