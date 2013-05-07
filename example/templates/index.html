@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Example Omega Application</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/example.css">
+</head>
+<body>
+<h1>News Items:</h1>
+<ul>
+    {% for item in news %}
+    <li>{{ item.title }} by {{ item.author }}</li>
+    {% endfor %}
+</ul>
+</body>
+</html>

@@ -10,15 +10,13 @@ var swig = require('swig');
 
 swig.init({
     cache: false,
-    root: '../templates'
+    root: './templates'
 });
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 function index(request, response)
 {
-    console.log('sup?');
-
     var items = [
         {
             title: "Some item?",
