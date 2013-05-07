@@ -12,7 +12,7 @@ var app = require('omega-node').app;
 app.static.add([
     {
         url: '/static',
-        path: path.resolve(path.join(_dirname, 'static'))
+        path: path.resolve(path.join(__dirname, 'static'))
     }
 ]);
 
