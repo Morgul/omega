@@ -1,3 +1,0 @@
-[submodule "utils/logger"]
-	path = utils/logger
-	url = https://github.com/Morgul/omega-logger.git

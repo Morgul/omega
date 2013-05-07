@@ -9,12 +9,12 @@ var app = require('omega-node').app;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-app.static.add([
+app.static.add(
     {
         url: '/static',
-        path: path.resolve(path.join(__dirname, 'static'))
+        path: path.join(__dirname, 'static')
     }
-]);
+);
 
 // Start the omega app.
 app.listen();

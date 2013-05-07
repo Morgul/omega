@@ -10,7 +10,7 @@ A basic Omega application looks like this:
 var path = require('path');
 var app = require('omega-node').app;
 
-app.static.add({url: '/static', path: path.resolve(path.join(__dirname, 'static'))});
+app.static.add({url: '/static', path: path.join(__dirname, 'static')});
 
 // Start the omega app.
 app.listen();
@@ -35,10 +35,10 @@ directories to serve:
 var path = require('path');
 var app = require('omega-node').app;
 
-app.static.add([
+app.static.add(
     {
         url: '/static',
-        path: path.resolve(path.join(__dirname, 'static'))
+        path: path.join(__dirname, 'static')
     },
     {
         url: '/images',
@@ -50,7 +50,7 @@ app.static.add([
         options: {
             showDir: true
         }
-]);
+);
 
 ```
 
@@ -79,7 +79,7 @@ It also supports adding multiple paths, with multiple verbs at once:
 var app = require('omega-node').app;
 var controllers = require('./controllers');
 
-app.router.add([
+app.router.add(
     {
         path: '/',
         get: controllers.index
@@ -89,7 +89,7 @@ app.router.add([
         get: controllers.blog_index,
         post: controllers.blog_new
     }
-]);
+);
 
 ```
 
