@@ -4,9 +4,12 @@
     "description": "A web application framework based on socket.io and angularjs.",
     "dependencies": {
         "ecstatic": "0.4.2",
-        "socket.io": "0.9.11",
+        "socket.io": "0.9.14",
         "router": "0.6.2",
         "swig": "latest"
+    },
+    "devDependencies": {
+        "vows": "latest"
     },
     "main": "omega.js",
     "scripts": {
