@@ -7,7 +7,14 @@
 var path = require('path');
 var app = require('omega-node').app;
 
+var news = require('./lib/news');
+
 // ---------------------------------------------------------------------------------------------------------------------
+
+app.router.add({
+    path: '/',
+    get: news.index
+});
 
 app.static.add(
     {

@@ -4,7 +4,8 @@
   "description": "Example omega website.",
   "main": "server.js",
   "dependencies": {
-    "omega-node": "~0.0.1"
+    "omega-node": "latest",
+    "swig": "latest"
   },
   "devDependencies": {},
   "scripts": {
