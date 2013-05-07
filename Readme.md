@@ -150,3 +150,26 @@ This makes is nice and straightforward to write `socket.io` code however you wis
 
 This is a massive work in progress. Currently, nothing's tested, and while there may be code there, I've not even run it
 yet. I'll remove this notice one I have unit tests, and replace it by something a bit more informative.
+
+**Update:** Well, it seems to run, to some extent. I've not really tested anything besides basic static file serving.
+However, if you want to run the example application, you will need to do the following in the omega-node directory:
+
+```bash
+$ npm link .
+$ cd example
+$ npm link omega-node
+```
+
+Now, the example application can be started:
+
+```bash
+$ npm start
+
+> example@0.0.0 start /Users/morgul/Development/omega-node/example
+> node server.js
+
+   info  - socket.io started
+
+```
+
+You can then view the example index at: [http://localhost:8080/static/index.html](http://localhost:8080/static/index.html)
