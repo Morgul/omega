@@ -146,6 +146,14 @@ app.channels('/news').on('connection', function (socket) {
 
 This makes is nice and straightforward to write `socket.io` code however you wish.
 
+## Unit Tests
+
+Tests can be run with:
+
+```bash
+$ npm tests
+```
+
 ## Work in Progress
 
 This is a massive work in progress. Currently, nothing's tested, and while there may be code there, I've not even run it
