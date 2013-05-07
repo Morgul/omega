@@ -4,12 +4,16 @@
 // @module omega.js
 // ---------------------------------------------------------------------------------------------------------------------
 
+var path = require('path');
 var app = require('omega-node').app;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-app.router.addRoutes([
-    ['/', {GET: function(){}}]
+app.static.add([
+    {
+        url: '/static',
+        path: path.resolve(path.join(_dirname, 'static'))
+    }
 ]);
 
 // Start the omega app.
