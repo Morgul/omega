@@ -7,7 +7,7 @@ var cli = require('commander');
 var package = require('../package.json');
 var smpltmpl = require('../util/smpltmpl');
 
-var logger = require('../lib/logging').loggerFor('omega-admin.js');
+var logger = require('../lib/logging').getLogger('omega-admin.js');
 
 //----------------------------------------------------------------------------------------------------------------------
 

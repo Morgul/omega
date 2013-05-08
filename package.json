@@ -17,7 +17,7 @@
     },
     "main": "omega.js",
     "bin": {
-        "omega-admin": "./scripts/admin.js"
+        "omega-admin": "./scripts/omega-admin.js"
     },
     "scripts": {
         "test": "vows tests/* --spec"
