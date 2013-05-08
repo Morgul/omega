@@ -5,6 +5,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 var connect = require('connect');
+var passport = require('passport');
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -20,9 +21,18 @@ secret = "{{ secret }}";
 
 // Middleware
 middleware = [
-    // Put connect-compatible middleware here.
-    // connect.query(),
-    // some-other-middleware()
+    // Standard connect middleware
+    connect.query(),
+    connect.cookieParser(),
+    connect.session({
+        secret: secret,
+        key: 'sid',
+        cookie: { secure: true }
+    }),
+
+    // Authentication support
+    passport.initialize(),
+    passport.session()
 ];
 
 //----------------------------------------------------------------------------------------------------------------------
