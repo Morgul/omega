@@ -1,23 +1,31 @@
 {
     "name": "omega-node",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "A web application framework based on socket.io and angularjs.",
     "dependencies": {
+        "xregexp": "latest",
         "ecstatic": "0.4.2",
         "socket.io": "0.9.14",
         "router": "0.6.2",
         "swig": "latest",
         "connect": "latest",
+        "commander": "1.1.1",
         "omega-logger": "git+https://github.com/Morgul/omega-logger.git"
     },
     "devDependencies": {
         "vows": "latest"
     },
     "main": "omega.js",
+    "bin": {
+        "omega-admin": "./scripts/admin.js"
+    },
     "scripts": {
         "test": "vows tests/* --spec"
     },
-    "repository": "",
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/Morgul/omega-node.git"
+    },
     "keywords": [
         "node",
         "socket.io",

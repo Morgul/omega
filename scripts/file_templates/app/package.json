@@ -1,11 +1,10 @@
 {
-    "name": "example",
+    "name": "{{ app }}",
     "version": "0.0.0",
-    "description": "Example omega website.",
+    "description": "An omega web application.",
     "main": "server.js",
     "dependencies": {
-        "omega-node": "latest",
-        "swig": "latest"
+        "omega-node": "latest"
     },
     "devDependencies": {},
     "scripts": {
@@ -14,8 +13,8 @@
     },
     "repository": "",
     "keywords": [
-        "example"
+        "omega"
     ],
-    "author": "Christopher S. Case <chris.case@g33xnexus.com>",
+    "author": "Your Name <your.email@example.com>",
     "license": "MIT"
 }
