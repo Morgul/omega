@@ -9,7 +9,9 @@
     "devDependencies": {},
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js"
+        "start": "node server.js",
+        "sync": "node -e \"require('omega-node').utils.sync()\"",
+        "drop": "node -e \"require('omega-node').utils.drop()\""
     },
     "repository": "",
     "keywords": [

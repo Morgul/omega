@@ -5,6 +5,7 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 var render = require('./util/render');
+var sequelize = require('./util/sequelize');
 var App = require('./lib/app').App;
 var AuthMan = require('./lib/auth').Auth;
 
@@ -24,7 +25,9 @@ module.exports = {
     auth: auth,
     db: DbMan,
     utils: {
-        render: render
+        render: render,
+        sync: function(){ sequelize.sync(DbMan); },
+        drop: function(){ sequelize.drop(DbMan); }
     }
 }; // end exports
 
