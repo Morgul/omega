@@ -3,13 +3,15 @@
     "version": "0.1.0",
     "description": "A web application framework based on socket.io and angularjs.",
     "dependencies": {
+        "commander": "1.1.1",
         "xregexp": "latest",
         "ecstatic": "0.4.2",
         "socket.io": "0.9.14",
         "router": "0.6.2",
         "swig": "latest",
         "connect": "latest",
-        "commander": "1.1.1",
+		"connect-redirection": "latest",
+        "passport": "latest",
         "omega-logger": "git+https://github.com/Morgul/omega-logger.git"
     },
     "devDependencies": {
