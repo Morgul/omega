@@ -68,7 +68,7 @@ with omega:
 var app = require('omega-node').app;
 var controllers = require('./controllers');
 
-app.router.add({path: '/', get: controllers.index});
+app.router.add({url: '/', get: controllers.index});
 
 ```
 
@@ -81,7 +81,7 @@ var controllers = require('./controllers');
 
 app.router.add(
     {
-        path: '/',
+        url: '/',
         get: controllers.index
     },
     {
@@ -93,10 +93,10 @@ app.router.add(
 
 ```
 
-The `path` parameter can be a regular expression, supporting capture groups:
+The `url` parameter can be a regular expression, supporting capture groups:
 
 ```javascript
-app.router.add({path: '/blog/{slug}', get: controllers.blog});
+app.router.add({url: '/blog/{slug}', get: controllers.blog});
 ```
 
 In the `controllers.blog` function, you can get the url parameter like this:
