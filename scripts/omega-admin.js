@@ -53,7 +53,7 @@ function createApp(appName)
     // Generate a random string for app's secret key.
     try
     {
-        var secret = require('crypto').randomBytes(48).toString('hex')
+        var secret = require('crypto').randomBytes(48).toString('hex');
     }
     catch(error)
     {

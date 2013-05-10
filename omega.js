@@ -6,14 +6,19 @@
 
 var render = require('./util/render');
 var App = require('./lib/app').App;
+var Auth = require('./lib/auth').Auth;
 
 // Create a new omega application
 var app = new App();
+
+// Create a new AuthManager
+var auth = new Auth();
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
     app: app,
+    auth: auth,
     utils: {
         render: render
     }
