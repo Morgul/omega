@@ -12,6 +12,7 @@
         "connect": "latest",
 		"connect-redirection": "latest",
         "passport": "latest",
+        "sequelize": "latest",
         "omega-logger": "git+https://github.com/Morgul/omega-logger.git"
     },
     "devDependencies": {
