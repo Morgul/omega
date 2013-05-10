@@ -23,16 +23,13 @@ secret = "{{ secret }}";
 middleware = [
     // Standard connect middleware
     connect.query(),
-    connect.bodyParser(),       // Required for passport-local
+
+    // Not required, but recommended for auth
     connect.cookieParser(secret),
     connect.session({
         secret: secret,
         key: 'sid'
-    }),
-
-    // Authentication support
-    passport.initialize(),
-    passport.session()
+    })
 ];
 
 //----------------------------------------------------------------------------------------------------------------------
