@@ -10,6 +10,7 @@
         "router": "0.6.2",
         "swig": "latest",
         "connect": "latest",
+		"connect-redirection": "latest",
         "passport": "latest",
         "omega-logger": "git+https://github.com/Morgul/omega-logger.git"
     },
