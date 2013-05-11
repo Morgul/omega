@@ -4,14 +4,14 @@
     "description": "An omega web application.",
     "main": "server.js",
     "dependencies": {
-        "omega-node": "latest"
+        "omega": "latest"
     },
     "devDependencies": {},
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js",
-        "sync": "node -e \"require('omega-node').utils.sync()\"",
-        "drop": "node -e \"require('omega-node').utils.drop()\""
+        "sync": "node -e \"require('omega').utils.sync()\"",
+        "drop": "node -e \"require('omega').utils.drop()\""
     },
     "repository": "",
     "keywords": [

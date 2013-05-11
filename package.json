@@ -1,5 +1,5 @@
 {
-    "name": "omega-node",
+    "name": "omega",
     "version": "0.1.0",
     "description": "A web application framework based on socket.io and angularjs.",
     "dependencies": {
@@ -30,7 +30,7 @@
     },
     "repository": {
         "type" : "git",
-        "url" : "https://github.com/Morgul/omega-node.git"
+        "url" : "https://github.com/Morgul/omega.git"
     },
     "keywords": [
         "node",

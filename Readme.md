@@ -8,7 +8,7 @@ A basic Omega application looks like this:
 
 ```javascript
 var path = require('path');
-var app = require('omega-node').app;
+var app = require('omega').app;
 
 app.static.add({url: '/static', path: path.join(__dirname, 'static')});
 
@@ -33,7 +33,7 @@ directories to serve:
 
 ```javascript
 var path = require('path');
-var app = require('omega-node').app;
+var app = require('omega').app;
 
 app.static.add(
     {
@@ -65,7 +65,7 @@ with omega:
 
 ```javascript
 
-var app = require('omega-node').app;
+var app = require('omega').app;
 var controllers = require('./controllers');
 
 app.router.add({url: '/', get: controllers.index});
@@ -76,7 +76,7 @@ It also supports adding multiple paths, with multiple verbs at once:
 
 ```javascript
 
-var app = require('omega-node').app;
+var app = require('omega').app;
 var controllers = require('./controllers');
 
 app.router.add(
@@ -118,7 +118,7 @@ HTTP verbs supported there are supported by omega.
 One of the big things omega provides is `socket.io` functionality. We expose this in a very straightforward way:
 
 ```javascript
-var app = require('omega-node').app;
+var app = require('omega').app;
 
 app.sockets.on('connection', function(socket) {
     socket.emit('news', { hello: 'world' });
@@ -137,7 +137,7 @@ you can access it via `app._io`.)
 We also expose socket.io's namespaces as `channels`:
 
 ```javascript
-var app = require('omega-node').app;
+var app = require('omega').app;
 
 app.channels('/news').on('connection', function (socket) {
     socket.emit('item', { news: 'item' });
@@ -160,12 +160,12 @@ This is a massive work in progress. Currently, nothing's tested, and while there
 yet. I'll remove this notice one I have unit tests, and replace it by something a bit more informative.
 
 **Update:** Well, it seems to run, to some extent. I've not really tested anything besides basic static file serving.
-However, if you want to run the example application, you will need to do the following in the omega-node directory:
+However, if you want to run the example application, you will need to do the following in the omega directory:
 
 ```bash
 $ npm link .
 $ cd example
-$ npm link omega-node
+$ npm link omega
 ```
 
 Now, the example application can be started:
@@ -173,7 +173,7 @@ Now, the example application can be started:
 ```bash
 $ npm start
 
-> example@0.0.0 start /Users/morgul/Development/omega-node/example
+> example@0.0.0 start /Users/morgul/Development/omega/example
 > node server.js
 
    info  - socket.io started
