@@ -1,39 +1,39 @@
-# Omega
+# Omega Web Framework
 
 A web application framework that is designed to support realtime web applications simply and effectively.
 
 ## Basic App
 
-A basic Omega application looks like this:
+A basic omega-wf application looks like this:
 
 ```javascript
 var path = require('path');
-var app = require('omega').app;
+var app = require('omega-wf').app;
 
 app.static.add({url: '/static', path: path.join(__dirname, 'static')});
 
-// Start the omega app.
+// Start the omega-wf app.
 app.listen();
 
 ```
 
-This tells omega to serve the `./static` folder statically at the url `/static`, and then starts listening for incomming
-connections. Admitedly, this isn't the most exciting application in the world, but it illustrates the basics of omega;
-first and foremost: _omega is simple_. It tries to make whatever you're doing as straightforward as possible, and hide
+This tells omega-wf to serve the `./static` folder statically at the url `/static`, and then starts listening for incomming
+connections. Admitedly, this isn't the most exciting application in the world, but it illustrates the basics of omega-wf;
+first and foremost: _omega-wf is simple_. It tries to make whatever you're doing as straightforward as possible, and hide
 any complexity from you.
 
-Second, this demonstrates a core concept of working with omega: _the app is king_. Omega's application object provides
-an api into omega's functionality. Really, this should be intuitive for most people, but it's worth repeating.
+Second, this demonstrates a core concept of working with omega-wf: _the app is king_. omega-wf's application object provides
+an api into omega-wf's functionality. Really, this should be intuitive for most people, but it's worth repeating.
 
 ## Static File Serving
 
-The basic example also included a basic example of static file serving. Omega supports as many static files as you would
+The basic example also included a basic example of static file serving. omega-wf supports as many static files as you would
 like, and handled directories, as well as individual files. To exand on the first example, we can also pass a list of
 directories to serve:
 
 ```javascript
 var path = require('path');
-var app = require('omega').app;
+var app = require('omega-wf').app;
 
 app.static.add(
     {
@@ -54,18 +54,18 @@ app.static.add(
 
 ```
 
-Under the hood omega just uses [ecstatic](https://github.com/jesusabdullah/node-ecstatic). The `options` object is
+Under the hood omega-wf just uses [ecstatic](https://github.com/jesusabdullah/node-ecstatic). The `options` object is
 passed directly to `ecstatic`.
 
 ## URL Routing
 
-Even though the focus of omega is on realtime web applications, there are reasons you may wish to do things a more
+Even though the focus of omega-wf is on realtime web applications, there are reasons you may wish to do things a more
 traditional way, with server-side processing. Or, perhaps, you need to write a simple `REST` service. That's easily done
-with omega:
+with omega-wf:
 
 ```javascript
 
-var app = require('omega').app;
+var app = require('omega-wf').app;
 var controllers = require('./controllers');
 
 app.router.add({url: '/', get: controllers.index});
@@ -76,7 +76,7 @@ It also supports adding multiple paths, with multiple verbs at once:
 
 ```javascript
 
-var app = require('omega').app;
+var app = require('omega-wf').app;
 var controllers = require('./controllers');
 
 app.router.add(
@@ -111,14 +111,14 @@ function(request, response) {
 ```
 
 This is all simply a wrapper around [gett/router](https://github.com/gett/router), with a bit of syntactic sugar. All
-HTTP verbs supported there are supported by omega.
+HTTP verbs supported there are supported by omega-wf.
 
 ## Socket.io
 
-One of the big things omega provides is `socket.io` functionality. We expose this in a very straightforward way:
+One of the big things omega-wf provides is `socket.io` functionality. We expose this in a very straightforward way:
 
 ```javascript
-var app = require('omega').app;
+var app = require('omega-wf').app;
 
 app.sockets.on('connection', function(socket) {
     socket.emit('news', { hello: 'world' });
@@ -137,7 +137,7 @@ you can access it via `app._io`.)
 We also expose socket.io's namespaces as `channels`:
 
 ```javascript
-var app = require('omega').app;
+var app = require('omega-wf').app;
 
 app.channels('/news').on('connection', function (socket) {
     socket.emit('item', { news: 'item' });
@@ -160,12 +160,12 @@ This is a massive work in progress. Currently, nothing's tested, and while there
 yet. I'll remove this notice one I have unit tests, and replace it by something a bit more informative.
 
 **Update:** Well, it seems to run, to some extent. I've not really tested anything besides basic static file serving.
-However, if you want to run the example application, you will need to do the following in the omega directory:
+However, if you want to run the example application, you will need to do the following in the omega-wf directory:
 
 ```bash
 $ npm link .
 $ cd example
-$ npm link omega
+$ npm link omega-wf
 ```
 
 Now, the example application can be started:
@@ -173,7 +173,7 @@ Now, the example application can be started:
 ```bash
 $ npm start
 
-> example@0.0.0 start /Users/morgul/Development/omega/example
+> example@0.0.0 start /Users/morgul/Development/omega-wf/example
 > node server.js
 
    info  - socket.io started

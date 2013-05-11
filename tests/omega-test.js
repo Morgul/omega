@@ -1,28 +1,28 @@
 //----------------------------------------------------------------------------------------------------------------------
-// Tests for the omega module.
+// Tests for the omega-wf module.
 //
-// @module omega-test.js
+// @module omega-wf-test.js
 //----------------------------------------------------------------------------------------------------------------------
 
 var vows = require('vows');
 var assert = require('assert');
 
-var omega = require('../omega');
+var omega-wf = require('../omega-wf');
 
 //----------------------------------------------------------------------------------------------------------------------
 
-vows.describe("Omega")
+vows.describe("omega-wf")
     .addBatch({
-        'The `omega.js` module':
+        'The `omega-wf.js` module':
         {
             'has an `app` property':
             {
-                topic: omega.app,
+                topic: omega-wf.app,
                 'that is defined': function(topic)
                 {
                     assert.isDefined(topic);
                 },
-                'that is an instance of OmegaApp': function(topic)
+                'that is an instance of omega-wfApp': function(topic)
                 {
                     assert.instanceOf(topic, require('../lib/app').App);
                 }

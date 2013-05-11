@@ -1,21 +1,21 @@
 {
     "name": "{{ app }}",
     "version": "0.0.0",
-    "description": "An omega web application.",
+    "description": "An omega-wf web application.",
     "main": "server.js",
     "dependencies": {
-        "omega": "latest"
+        "omega-wf": "latest"
     },
     "devDependencies": {},
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js",
-        "sync": "node -e \"require('omega').utils.sync()\"",
-        "drop": "node -e \"require('omega').utils.drop()\""
+        "sync": "node -e \"require('omega-wf').utils.sync()\"",
+        "drop": "node -e \"require('omega-wf').utils.drop()\""
     },
     "repository": "",
     "keywords": [
-        "omega"
+        "omega-wf"
     ],
     "author": "Your Name <your.email@example.com>",
     "license": "MIT"

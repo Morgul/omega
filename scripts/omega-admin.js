@@ -7,7 +7,7 @@ var cli = require('commander');
 var package = require('../package.json');
 var smpltmpl = require('../util/smpltmpl');
 
-var logger = require('../lib/logging').getLogger('omega-admin.js');
+var logger = require('../lib/logging').getLogger('omega-wf-admin.js');
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ var matchedCommand = false;
 cli.version(package.version);
 
 cli.command('startapp [APP]')
-    .description('create a new omega application named APP in the current directory.')
+    .description('create a new omega-wf application named APP in the current directory.')
     .action(createApp);
 
 cli.command('help')
@@ -45,7 +45,7 @@ function createApp(appName)
 {
     matchedCommand = true;
 
-    logger.info("Creating the %s omega app...", appName);
+    logger.info("Creating the %s omega-wf app...", appName);
 
     var appPath = path.join(process.cwd(), appName);
     var appTemplateDir = path.join(__dirname, 'file_templates', 'app');
@@ -76,7 +76,7 @@ function createApp(appName)
         // Move us into the project directory
         process.chdir(appPath);
 
-        // Create the basic omega project files.
+        // Create the basic omega-wf project files.
         smpltmpl.templateFile('server.js', appTemplateDir, appPath, context);
         smpltmpl.templateFile('settings.js', appTemplateDir, appPath, context);
         smpltmpl.templateFile('package.json', appTemplateDir, appPath, context);
