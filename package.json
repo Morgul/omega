@@ -16,21 +16,21 @@
         "sqlite3": "~2.1.5",
         "pg": "~0.10.2",
         "mysql": "~2.0.0-alpha7",
-        "omega-wf-logger": "git+https://github.com/Morgul/omega-wf-logger.git"
+        "omega-wf-logger": "git+https://github.com/Morgul/omega-logger.git"
     },
     "devDependencies": {
         "vows": "latest"
     },
     "main": "omega-wf.js",
     "bin": {
-        "omega-wf-admin": "./scripts/omega-wf-admin.js"
+        "omega-wf-admin": "./scripts/omega-admin.js"
     },
     "scripts": {
         "test": "vows tests/* --spec"
     },
     "repository": {
         "type" : "git",
-        "url" : "https://github.com/Morgul/omega-wf.git"
+        "url" : "https://github.com/Morgul/omega.git"
     },
     "keywords": [
         "node",
