@@ -5,22 +5,29 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 var render = require('./util/render');
+var sequelize = require('./util/sequelize');
 var App = require('./lib/app').App;
-var Auth = require('./lib/auth').Auth;
+var AuthMan = require('./lib/auth').Auth;
 
 // Create a new omega application
 var app = new App();
 
 // Create a new AuthManager
-var auth = new Auth();
+var auth = new AuthMan();
+
+// Create a database manager
+var DbMan = require('./lib/database').createDbMan(app.config);
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
     app: app,
     auth: auth,
+    db: DbMan,
     utils: {
-        render: render
+        render: render,
+        sync: function(){ sequelize.sync(DbMan); },
+        drop: function(){ sequelize.drop(DbMan); }
     }
 }; // end exports
 
