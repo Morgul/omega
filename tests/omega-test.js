@@ -7,7 +7,7 @@
 var vows = require('vows');
 var assert = require('assert');
 
-var omega-wf = require('../omega-wf');
+var omega-wf = require('../omega');
 
 //----------------------------------------------------------------------------------------------------------------------
 
