@@ -4,8 +4,16 @@
 // @module sequelize.js
 //----------------------------------------------------------------------------------------------------------------------
 
+var path = require('path');
+
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
 function sync(manager)
 {
+    require(path.resolve('./models'));
+
     for(var dbName in manager.databases)
     {
         console.log('Syncing database \'%s\'.', dbName);
@@ -15,6 +23,8 @@ function sync(manager)
 
 function drop(manager)
 {
+    require(path.resolve('./models'));
+
     for(var dbName in manager.databases)
     {
         console.log('Droping database \'%s\'.', dbName);
