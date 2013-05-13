@@ -16,6 +16,9 @@ app.router.add(
     }
 );
 
+// Set the application's name
+app.setName('{{ app }}');
+
 // Start the omega-wf app.
 app.listen();
 
