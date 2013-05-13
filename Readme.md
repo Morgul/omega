@@ -157,6 +157,54 @@ app.channels('/news').on('connection', function (socket) {
 
 This makes is nice and straightforward to write `socket.io` code however you wish.
 
+## Authentication
+
+Omega has integration with [Passport]() for authentication. This can be accessed through `require('omega-wf').auth`. (_
+Note: This is one of the few pieces not wrapped in the omega app. This is because auth is considered optional._)
+
+Example to come soon.
+
+## Databases
+
+Omega has integration with [Sequelize]() for database connectivity. This can be accessed through `require('omega-wf').db`.
+(_Note: This is one of the few pieces not wrapped in the omega app. This is because it is considered optional._)
+
+It should be noted that you are still free to use any ORM you wish; we just provide one for you incase you don't want to
+integrate it yourself, and you like working with SQL. (`sqlite` is still the defacto development database in most
+instances, which is why omega still defaults to sql over nosql solutions.)
+
+Example to come soon.
+
+## Initialization
+
+Sometimes, you need to do some initialization that depends on the omega app having finished it's setup. For these cases,
+omega provides `app.init`:
+
+```javascript
+var app = require('omega-wf').app;
+
+app.init(function() {
+    // It is safe to work with app.config here.
+});
+
+// It is not safe to work with app.config here.
+
+```
+
+This is very useful if you want to split your app into several modules, some of which depend on configuration.
+
+## App Name
+
+It's possible to set the name of your application:
+
+```javascript
+var app = require('omega-wf').app;
+
+app.setName("Some Really Cool App v2.0.1.adf23019w-pre7");
+```
+
+This is useful for logging, mostly. (But it might get used later. Suggestions welcome!)
+
 ## Unit Tests
 
 Tests can be run with:
