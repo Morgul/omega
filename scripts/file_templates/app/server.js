@@ -9,9 +9,9 @@ var app = require('omega-wf').app;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-app.static.add(
+app.router.add(
     {
-        url: '/static',
+        url: '/static/*',
         path: path.join(__dirname, 'static')
     }
 );
