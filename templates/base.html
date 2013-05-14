@@ -8,19 +8,19 @@
         <meta name="author" content="">
 
         <!-- These scripts must be at the start of the page -->
-        <script src="/omega/vendor/jquery/jquery-2.0.0.min.js"></script>
-        <script src="/omega/vendor/angularjs/angular.min.js"></script>
-        <script src="/omega/vendor/angularjs/angular-resource.min.js"></script>
+        <script src="{{ static|default('/omega') }}/vendor/jquery/jquery-2.0.0.min.js"></script>
+        <script src="{{ static|default('/omega') }}/vendor/angularjs/angular.min.js"></script>
+        <script src="{{ static|default('/omega') }}/vendor/angularjs/angular-resource.min.js"></script>
 
         <!-- Application Scripts -->
         {% block app_scripts %}{% endblock %}
 
         <!-- Vendor Styles -->
-        <link href="/omega/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <link href="/omega/vendor/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="{{ static|default('/omega') }}/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ static|default('/omega') }}/vendor/fontawesome/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- Application Styles -->
-        <link href="/omega/css/omega.css" rel="stylesheet">
+        <link href="{{ static|default('/omega') }}/css/omega.css" rel="stylesheet">
         {% block app_styles %}{% endblock %}
 
         {% block extra_head %}{% endblock %}
@@ -33,7 +33,7 @@
 
         <!-- ======================================================================================================= -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="/omega/vendor/bootstrap/bootstrap.min.js"></script>
+        <script src="{{ static|default('/omega') }}/vendor/bootstrap/bootstrap.min.js"></script>
         <!-- ======================================================================================================= -->
     </body>
 </html>

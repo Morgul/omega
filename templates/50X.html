@@ -14,14 +14,14 @@
 <div class="container">
     <div class="hero-unit">
         <h1><i class="icon-warning-sign"></i> {{ error }}</h1>
-        {% if debug %}
+        {% if DEBUG %}
         <p>{{ message }}</p>
         {% else %}
         <p>An error has occured. Please contact the site's maintainer for assistance.</p>
         {% endif %}
     </div>
 
-    {% if debug %}
+    {% if DEBUG %}
     <h4><i class="icon-code"></i> Stack Trace:</h4>
     <div class="well trace">
         {{ trace }}
