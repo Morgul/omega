@@ -1,33 +1,25 @@
 //----------------------------------------------------------------------------------------------------------------------
-// Omega Admin Section Extra
+// Views for the admin section
 //
-// @module admin.js
+// @module views.js
 //----------------------------------------------------------------------------------------------------------------------
 
-var views = require('./views');
+var path = require('path');
+var render = require('../../util/swig').render;
 
 //----------------------------------------------------------------------------------------------------------------------
 
-function initialize()
+function index(req, resp)
 {
-    var app = require('../../omega').app;
-    var url = app.config.omegaAdminUrl || '/admin';
+    render(resp, "../extra/admin/templates/index.html", {
 
-    app.router.add(
-    {
-        url: url,
-        get: views.index
-    },
-    {
-        url: url + '/*',
-        get: views.index
-    });
-} // end initialize
+    }, true);
+} // end index
 
 //----------------------------------------------------------------------------------------------------------------------
 
 module.exports = {
-    initialize: initialize
+    index: index
 }; // end exports
 
 //----------------------------------------------------------------------------------------------------------------------
