@@ -15,9 +15,9 @@
     <div class="hero-unit">
         <h1><i class="icon-warning-sign"></i> {{ error }}</h1>
         {% if DEBUG %}
-        <p>{{ message }}</p>
+        <p>An internal error has occured: <span class="mono">{{ message }}</span></p>
         {% else %}
-        <p>An error has occured. Please contact the site's maintainer for assistance.</p>
+        <p>An error has occurred. Please contact the site's maintainer for assistance.</p>
         {% endif %}
     </div>
 
@@ -29,4 +29,3 @@
     {% endif %}
 </div>
 {% endblock %}
-
