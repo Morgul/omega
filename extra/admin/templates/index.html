@@ -1,20 +1,27 @@
 {% extends base %}
 
+{% block extra_head %}
+    <script src="{{ static|default('/omega') }}/vendor/angularjs/angular.min.js"></script>
+    <script src="{{ static|default('/omega') }}/vendor/angularjs/angular-resource.min.js"></script>
+{% endblock %}
+
 {% block content %}
-<div class="navbar navbar-static-top">
-    <div class="navbar-inner">
-        <div class="row-fluid">
-            <span class="brand span12 text-center">{{ error }}</span>
+<div ng-app="omega.admin">
+    <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+            <div class="row-fluid">
+                <span class="brand span12 text-center">&Omega; Admin Section &Omega;</span>
+            </div>
         </div>
     </div>
-</div>
 
-<div style="margin-top: 10px;">&nbsp;</div>
+    <div style="margin-top: 10px;">&nbsp;</div>
 
-<div class="container">
-    <div class="hero-unit">
-        <h1><i class="icon-warning-sign"></i> ADMIN SECTION HERE</h1>
-        <p>^^ What he said.</p>
+    <div class="container">
+        <div class="hero-unit">
+            <h1><i class="icon-warning-sign"></i> ADMIN SECTION HERE</h1>
+            <p>^^ What he said.</p>
+        </div>
     </div>
 </div>
 {% endblock %}
