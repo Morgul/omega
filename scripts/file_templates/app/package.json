@@ -10,6 +10,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "node server.js",
+        "dump": "node -e \"require('omega-wf').utils.dump()\"",
         "sync": "node -e \"require('omega-wf').utils.sync()\"",
         "drop": "node -e \"require('omega-wf').utils.drop()\""
     },

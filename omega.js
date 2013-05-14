@@ -26,6 +26,7 @@ module.exports = {
     db: DbMan,
     utils: {
         render: render,
+        dump: function(){ sequelize.dump(DbMan); },
         sync: function(){ sequelize.sync(DbMan); },
         drop: function(){ sequelize.drop(DbMan); }
     }
