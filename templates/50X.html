@@ -1,9 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends base %}
 
-</body>
-</html>
+{% block content %}
+<div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+        <div class="row-fluid">
+            <span class="brand span12 text-center">{{ error }}</span>
+        </div>
+    </div>
+</div>
+
+<div style="margin-top: 10px;">&nbsp;</div>
+
+<div class="container">
+    <div class="hero-unit">
+        <h1><i class="icon-warning-sign"></i> {{ error }}</h1>
+        {% if debug %}
+        <p>{{ message }}</p>
+        {% else %}
+        <p>An error has occured. Please contact the site's maintainer for assistance.</p>
+        {% endif %}
+    </div>
+
+    {% if debug %}
+    <h4><i class="icon-code"></i> Stack Trace:</h4>
+    <div class="well trace">
+        {{ trace }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

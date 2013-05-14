@@ -4,10 +4,11 @@
 // @module omega-wf.js
 // ---------------------------------------------------------------------------------------------------------------------
 
-var render = require('./util/render');
-var sequelize = require('./util/sequelize');
 var App = require('./lib/app').App;
 var AuthMan = require('./lib/auth').Auth;
+
+var render = require('./util/swig').render;
+var sequelize = require('./util/sequelize');
 
 // Create a new omega-wf application
 var app = new App();
