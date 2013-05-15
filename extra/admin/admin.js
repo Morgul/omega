@@ -20,6 +20,10 @@ function initialize()
         path: path.join(__dirname, 'client')
     },
     {
+        url: url + '/models',
+        get: views.models
+    },
+    {
         url: url,
         get: views.index
     },
