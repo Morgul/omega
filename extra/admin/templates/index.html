@@ -1,27 +1,31 @@
 {% extends base %}
 
-{% block extra_head %}
+{% block app_scripts %}
+    <script>
+        // This function exists so that our server side templates can inject the admin url from the server's
+        // configuration into the client side, so that angular doesn't have to make requests for it, or do anything else
+        // to weird. This was the best solution that I could come up with for injecting this.
+        window.partialUrl = function(partial)
+        {
+            return "{{ admin_static|default('/admin/static') }}/partials/" + partial;
+        }; // end partialUrl
+    </script>
+
     <script src="{{ static|default('/omega') }}/vendor/angularjs/angular.min.js"></script>
     <script src="{{ static|default('/omega') }}/vendor/angularjs/angular-resource.min.js"></script>
+    <script src="{{ admin_static|default('/admin/static') }}/app.js"></script>
+    <script src="{{ admin_static|default('/admin/static') }}/controllers.js"></script>
+{% endblock %}
+
+{% block app_styles %}
+    <link href="{{ admin_static|default('/admin/static') }}/css/omega-admin.css" rel="stylesheet">
 {% endblock %}
 
 {% block content %}
 <div ng-app="omega.admin">
-    <div class="navbar navbar-static-top">
-        <div class="navbar-inner">
-            <div class="row-fluid">
-                <span class="brand span12 text-center">&Omega; Admin Section &Omega;</span>
-            </div>
-        </div>
-    </div>
+    <ng-include src="partialUrl('header.html')"></ng-include>
 
-    <div style="margin-top: 10px;">&nbsp;</div>
-
-    <div class="container">
-        <div class="hero-unit">
-            <h1><i class="icon-warning-sign"></i> ADMIN SECTION HERE</h1>
-            <p>^^ What he said.</p>
-        </div>
-    </div>
+    <!-- Main View -->
+    <div id="main-view" class="container-fluid" data-ng-view></div>
 </div>
 {% endblock %}

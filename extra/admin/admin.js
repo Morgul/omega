@@ -4,6 +4,7 @@
 // @module admin.js
 //----------------------------------------------------------------------------------------------------------------------
 
+var path = require('path');
 var views = require('./views');
 
 //----------------------------------------------------------------------------------------------------------------------
@@ -14,6 +15,10 @@ function initialize()
     var url = app.config.omegaAdminUrl || '/admin';
 
     app.router.add(
+    {
+        url: url + '/static/*',
+        path: path.join(__dirname, 'client')
+    },
     {
         url: url,
         get: views.index

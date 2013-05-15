@@ -11,8 +11,11 @@ var render = require('../../util/swig').render;
 
 function index(req, resp)
 {
-    render(resp, "../extra/admin/templates/index.html", {
+    var app = require('../../omega').app;
+    var url = app.config.omegaAdminUrl || '/admin';
 
+    render(resp, "../extra/admin/templates/index.html", {
+        admin_static: url + "/static"
     }, true);
 } // end index
 
