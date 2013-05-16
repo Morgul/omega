@@ -1,6 +1,16 @@
 <div class="container">
-    <div class="hero-unit">
-        <h1><i class="icon-warning-sign"></i> ADMIN SECTION HERE</h1>
-        <p>^^ What he said.</p>
+    <div class="navbar navbar-small">
+        <div class="navbar-inner">
+            <span class="brand"><i class="icon-tasks"></i> Models</span>
+        </div>
     </div>
+    <table class="table table-bordered table-striped">
+        <tr ng-repeat="model in models">
+            <td class="expand"><a href="#/{{ model.name }}">{{ model.name }}</a></td>
+            <td class="text-right shrink">
+                <button class="btn btn-mini btn-success"><i class="icon-plus"></i> Add</button>
+                <a href="#/{{ model.name }}" class="btn btn-mini btn-primary"><i class="icon-edit"></i> Edit</a>
+            </td>
+        </tr>
+    </table>
 </div>

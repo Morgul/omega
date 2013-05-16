@@ -2,3 +2,52 @@ header#main-header
 {
     margin-bottom: 10px;
 }
+
+table td.expand
+{
+    width: 99%
+}
+
+table td.shrink
+{
+    white-space:nowrap
+}
+
+.navbar.navbar-small .navbar-inner
+{
+    min-height: 20px;
+    font-size: 15px;
+    line-height: 14px;
+}
+
+.navbar.navbar-small .brand
+{
+    font-size: 15px;
+    padding-top: 7.5px;
+    padding-bottom: 5.5px;
+}
+.navbar.navbar-small .navbar-text
+{
+    font-size: 13px;
+    padding-top: 9px;
+    padding-bottom: 6px;
+}
+
+.navbar.navbar-small .navbar-form input[type='text']
+{
+    height: 13px;
+    font-size: 85%;
+    margin-top: 3px;
+}
+
+.navbar.navbar-small .btn-small
+{
+    margin-top: 3px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar.navbar-small
+{
+    margin-bottom: 10px;
+}

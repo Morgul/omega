@@ -10,21 +10,22 @@ var Controllers = angular.module('omega.admin.controllers', []);
 
 Controllers.controller("IndexCtrl", function($scope)
 {
-    console.log("Index");
 });
 
 //----------------------------------------------------------------------------------------------------------------------
 
-Controllers.controller("ModelCtrl", function($scope)
+Controllers.controller("ModelCtrl", function($scope, $routeParams)
 {
-    console.log("Model");
+    var modelName = $routeParams.model;
+    $scope.model = _.find($scope.models, function(model){ return model.name == modelName; });
+
 });
 
 //----------------------------------------------------------------------------------------------------------------------
 
 Controllers.controller("InstanceCtrl", function($scope)
 {
-    console.log("Instance");
 });
 
 //----------------------------------------------------------------------------------------------------------------------
+

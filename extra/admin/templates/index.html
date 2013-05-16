@@ -9,6 +9,14 @@
         {
             return "{{ admin_static|default('/admin/static') }}/partials/" + partial;
         }; // end partialUrl
+
+        // This function exists so that our server side templates can inject the admin url from the server's
+        // configuration into the client side, so that angular doesn't have to make requests for it, or do anything else
+        // to weird. This was the best solution that I could come up with for injecting this.
+        window.adminUrl = function(url)
+        {
+            return "{{ admin_url|default('/admin') }}" + url;
+        }; // end adminUrl
     </script>
 
     <script src="{{ static|default('/omega') }}/vendor/angularjs/angular.min.js"></script>

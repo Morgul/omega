@@ -15,7 +15,8 @@ function index(req, resp)
     var url = app.config.omegaAdminUrl || '/admin';
 
     render(resp, "../extra/admin/templates/index.html", {
-        admin_static: url + "/static"
+        admin_static: url + "/static",
+        admin_url: url
     }, true);
 } // end index
 
