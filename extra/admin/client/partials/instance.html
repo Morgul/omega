@@ -1,6 +1,34 @@
 <div class="container">
-    <div class="hero-unit">
-        <h1><i class="icon-warning-sign"></i> Instance</h1>
-        <p>^^ What he said.</p>
+    <div class="navbar navbar-small">
+        <div class="navbar-inner">
+            <span class="brand"><i class="icon-tasks"></i> {{ getName(instance) }}</span>
+            <button class="btn btn-mini pull-right" ng-click="cancel()"><i class="icon-plus"></i> Cancel</button>
+            <button class="btn btn-mini btn-primary pull-right" ng-click="save(true)"><i class="icon-save"></i> Save and Continue Editing</button>
+            <button class="btn btn-mini btn-primary pull-right" ng-click="save()"><i class="icon-save"></i> Save</button>
+        </div>
     </div>
+
+    <form class="form-horizontal">
+        <div class="control-group" ng-repeat="(key, value) in model.fields">
+            <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ key }}</label>
+            <div class="controls" ng-switch="value.type">
+                <input type="date" name="{{ key }}" ng-switch-when="DATETIME" ng-required="value.allowNull === false" ng-model="instance.model[key]">
+                <input type="number" name="{{ key }}" ng-switch-when="INTEGER" ng-required="value.allowNull === false" ng-model="instance.model[key]">
+                <textarea name="{{ key }}" ng-switch-when="TEXT" ng-required="value.allowNull === false" ng-model="instance.model[key]"></textarea>
+
+                <ng-switch ng-switch-default on="value.validate.isEmail">
+                    <input type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]">
+                    <input type="text" name="{{ key }}" ng-switch-default ng-required="value.allowNull === false" ng-model="instance.model[key]">
+                </ng-switch>
+            </div>
+        </div>
+    </form>
+
+    <hr/>
+
+    <button class="btn btn-mini pull-right" ng-click="cancel()"><i class="icon-plus"></i> Cancel</button>
+    <button class="btn btn-mini btn-primary pull-right" ng-click="save(true)"><i class="icon-save"></i> Save and Continue Editing</button>
+    <button class="btn btn-mini btn-primary pull-right" ng-click="save()"><i class="icon-save"></i> Save</button>
+    <button class="btn btn-mini" ng-click="cancel()"><i class="icon-arrow-left"></i> Back to {{ model.name }}</button>
 </div>
+

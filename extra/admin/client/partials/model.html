@@ -2,15 +2,17 @@
     <div class="navbar navbar-small">
         <div class="navbar-inner">
             <span class="brand"><i class="icon-tasks"></i> {{ model.name }}</span>
+            <button class="btn btn-mini btn-success pull-right"><i class="icon-plus"></i> Add</button>
         </div>
     </div>
     <table class="table table-bordered table-striped">
         <tr ng-repeat="instance in instances">
-            <td class="expand"><a href="#/{{ instance.name }}">{{ instance.name }}</a></td>
+            <td class="expand"><a href="#/{{ model.name }}/{{ instance.model.id }}">{{ getName(instance) }}</a></td>
             <td class="text-right shrink">
-                <a href="#/{{ model.name }}" class="btn btn-mini btn-primary"><i class="icon-edit"></i> Edit</a>
+                <a href="#/{{ model.name }}/{{ instance.model.id }}" class="btn btn-mini btn-primary"><i class="icon-edit"></i> Edit</a>
                 <button class="btn btn-mini btn-danger"><i class="icon-trash"></i> Delete</button>
             </td>
         </tr>
     </table>
+    <button class="btn btn-mini" ng-click="back()"><i class="icon-arrow-left"></i> Back to Admin</button>
 </div>
