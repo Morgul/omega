@@ -85,3 +85,8 @@ hr
 {
     margin: 10px 0;
 }
+
+.form-horizontal textarea
+{
+    height: 130px;
+}

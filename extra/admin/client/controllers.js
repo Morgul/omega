@@ -55,16 +55,13 @@ Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $lo
                 skipFields.push('createdAt');
                 skipFields.push('updatedAt');
 
-                $scope.model.fields = _.omit($scope.model.fields, skipFields);
+                var fields = _.omit($scope.model.fields, skipFields);
 
-                // Normalize values so they're all in object format.
-                _.each($scope.model.fields, function(value, key, list)
-                {
-                    if(!_.isObject(value))
-                    {
-                        $scope.model.fields[key] = {type: value};
-                    } // end if
-                });
+                // Split into key/value pairs so we can sort.
+                fields = _.pairs(fields);
+
+                // Sort fields
+                $scope.fields = _.sortBy(fields, "fieldIndex");
             } // end if
         });
     } // end if
