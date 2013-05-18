@@ -45,16 +45,18 @@ Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $lo
                 // Get the current instance
                 $scope.instance = _.find($scope.instances, function(instance){ return instance.model.id == modelID; });
 
+                //------------------------------------------------------------------------------------------------------
+                // Filter the fields object for display
+                //------------------------------------------------------------------------------------------------------
+
                 // Filter out fields that we shouldn't show.
                 var skipFields = _.filter(_.keys($scope.model.fields), function(field)
                 {
-                    return $scope.model.fields[field].autoIncrement
+                    // If we're an autoIncrement field, or don't have a fieldIndex, don't show us.
+                    return $scope.model.fields[field].autoIncrement || !($scope.model.fields[field].fieldIndex)
                 });
 
-                // Skip auto-generated fields
-                skipFields.push('createdAt');
-                skipFields.push('updatedAt');
-
+                // Remove the filtered fields
                 var fields = _.omit($scope.model.fields, skipFields);
 
                 // Split into key/value pairs so we can sort.
@@ -62,6 +64,32 @@ Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $lo
 
                 // Sort fields
                 $scope.fields = _.sortBy(fields, "fieldIndex");
+
+                //------------------------------------------------------------------------------------------------------
+                // Build up the relations for display
+                //------------------------------------------------------------------------------------------------------
+
+                $scope.relations = {};
+                console.log('Relations', $scope.model.relations);
+
+                _.each($scope.model.relations, function(relation)
+                {
+                    $http.get(adminUrl('/models/' + relation.target.name))
+                        .success(function(data, status)
+                        {
+                            data.forEach(function(model, index)
+                            {
+                                data[index].name = getName(model, relation.target.name);
+                            });
+
+                            relation.targetInstances = data;
+                            $scope.relations[relation.name] = relation;
+                        })
+                        .error(function(data, status)
+                        {
+                            console.error('Error occurred getting target instances:', data, 'status:', status);
+                        });
+                });
             } // end if
         });
     } // end if
@@ -110,12 +138,22 @@ function getInstances($scope, $http, modelName, callback)
         });
 } // getInstances
 
-function getName(instance)
+function getName(instance, modelName)
     {
         if(instance)
         {
-            // Default to something super generic
-            var name = "[Object " + instance.model.id + "]";
+            var name = "";
+
+            if(modelName)
+            {
+                // Something kinda generic
+                name = "[" + modelName + " Object " + instance.model.id + "]";
+            }
+            else
+            {
+                // Default to something super generic
+                name = "[Object " + instance.model.id + "]";
+            }
 
             // Check to see if we have a displayField option set.
             if(instance.options.displayName)

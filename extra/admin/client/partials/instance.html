@@ -2,7 +2,7 @@
     <div class="navbar navbar-small">
         <div class="navbar-inner">
             <span class="brand"><i class="icon-tasks"></i> {{ getName(instance) }}</span>
-            <!--button class="btn btn-mini pull-right" ng-click="cancel()"><i class="icon-plus"></i> Cancel</button>
+            <!--button class="btn btn-mini pull-right" ng-click="cancel()"><i class="icon-remove"></i> Cancel</button>
             <button class="btn btn-mini btn-primary pull-right" ng-click="save(true)"><i class="icon-save"></i> Save and Continue Editing</button>
             <button class="btn btn-mini btn-primary pull-right" ng-click="save()"><i class="icon-save"></i> Save</button-->
         </div>
@@ -22,6 +22,18 @@
                 </ng-switch>
             </div>
         </div>
+
+        <hr/>
+
+        <div class="control-group" ng-repeat="(key, value) in relations">
+            <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ key }}</label>
+            <div class="controls">
+                <select class="input-xlarge" name="{{ key }}" ng-model="instance.model[value.identifier]" ng-options="inst.model.id as inst.name for inst in value.targetInstances" ng-multiple="value.associationType == 'HasMany'">
+                    <option value="">-----</option>
+                </select>
+                <button class="btn btn-mini btn-success"><i class="icon-plus"></i> New</button>
+            </div>
+        </div>
     </form>
 
     <hr/>
@@ -30,7 +42,11 @@
         <b>{{ key }}</b> {{ value }}
     </div-->
 
-    <button class="btn btn-mini pull-right" ng-click="cancel()"><i class="icon-plus"></i> Cancel</button>
+    <!--div ng-repeat="(key, value) in model.fields">
+        <b>{{ key }}</b> {{ value }}
+    </div-->
+
+    <button class="btn btn-mini pull-right" ng-click="cancel()"><i class="icon-remove"></i> Cancel</button>
     <button class="btn btn-mini btn-primary pull-right" ng-click="save(true)"><i class="icon-save"></i> Save and Continue Editing</button>
     <button class="btn btn-mini btn-primary pull-right" ng-click="save()"><i class="icon-save"></i> Save</button>
     <button class="btn btn-mini" ng-click="cancel()"><i class="icon-arrow-left"></i> Back to {{ model.name }}</button>
