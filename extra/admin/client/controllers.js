@@ -38,6 +38,7 @@ Controllers.controller("ModelCtrl", function($scope, $routeParams, $http, $locat
             .error(function(data, status)
             {
                 console.error('Error occurred:', data, 'status:', status);
+
             });
     }; // end delete
 });
@@ -49,6 +50,7 @@ Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $lo
     var modelID = $routeParams.instance;
     var modelName = $routeParams.model;
     $scope.model = _.find($scope.models, function(model){ return model.name == modelName; });
+    $scope.foobar = [1];
 
     if(!$scope.instances)
     {

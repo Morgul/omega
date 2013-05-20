@@ -5,6 +5,7 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 var path = require('path');
+var async = require('async');
 var render = require('../../util/swig').render;
 
 var logger = require('../../lib/logging').getLogger('extra.admin');
@@ -41,7 +42,7 @@ function models(req, resp)
             var association = model.associations[aKey];
 
             associations.push({
-                name: aKey,
+                name: association.options.as || aKey,
                 accessors: association.accessors,
                 target: {
                     name: association.target.name
@@ -63,16 +64,28 @@ function models(req, resp)
 
 function instance(req, resp)
 {
-    var db = require('../../omega').db;
-
     var modelName = req.params.model;
     var id = req.params.id;
 
+    var db = require('../../omega').db;
     db.model(modelName).find(id)
         .success(function(model)
         {
             if(model != null)
             {
+                console.log('sup?');
+
+                // Pull HasMany associations
+                Object.keys(db.model(modelName).associations).forEach(function(aKey)
+                {
+                    var association = db.model(modelName).associations[aKey];
+
+                    if(association.associationType == 'HasMany')
+                    {
+                        console.log('Dude!');
+                    } // end if
+                });
+
                 resp.writeHead(200, { 'Content-Type': 'application/json' });
                 resp.end(JSON.stringify({ model: model, options: model.daoFactory.options }));
             }
@@ -93,23 +106,57 @@ function instance(req, resp)
 
 function all_instances(req, resp)
 {
-    var db = require('../../omega').db;
-
     var modelName = req.params.model;
 
+    var db = require('../../omega').db;
     db.model(modelName).findAll()
         .success(function(models)
         {
             if(models != null)
             {
                 var newModels = [];
-                models.forEach(function(model)
+                async.each(models, function(model, iterCallback)
                 {
-                    newModels.push({model: model, options: model.daoFactory.options});
-                });
+                    var associations = {};
+                    var getters = [];
 
-                resp.writeHead(200, { 'Content-Type': 'application/json' });
-                resp.end(JSON.stringify(newModels));
+                    // Pull HasMany associations
+                    Object.keys(db.model(modelName).associations).forEach(function(aKey)
+                    {
+                        var association = db.model(modelName).associations[aKey];
+
+                        if(association.associationType == 'HasMany')
+                        {
+                            getters.push(function(callback)
+                            {
+                                model[association.accessors.get]().success(function(data)
+                                {
+                                    var ids = [];
+
+                                    data.forEach(function(inst)
+                                    {
+                                        ids.push(inst.id);
+                                    });
+
+                                    var name = association.options.as || aKey;
+
+                                    associations[name] = ids;
+                                    callback();
+                                });
+                            });
+                        } // end if
+                    });
+
+                    async.parallel(getters, function()
+                    {
+                        newModels.push({model: model, associations: associations, options: model.daoFactory.options});
+                        iterCallback();
+                    });
+                }, function()
+                {
+                    resp.writeHead(200, { 'Content-Type': 'application/json' });
+                    resp.end(JSON.stringify(newModels));
+                });
             }
             else
             {

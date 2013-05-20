@@ -25,10 +25,15 @@
 
         <hr/>
 
-        <div class="control-group" ng-repeat="(key, value) in relations">
+        <div class="control-group" ng-repeat="(key, value) in relations" ng-switch="value.associationType == 'HasMany'">
             <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ key }}</label>
-            <div class="controls">
-                <select class="input-xlarge" name="{{ key }}" ng-model="instance.model[value.identifier]" ng-options="inst.model.id as inst.name for inst in value.targetInstances" ng-multiple="value.associationType == 'HasMany'">
+            <div class="controls "ng-switch-when="true">
+                <select class="input-xlarge" name="{{ key }}" ng-model="instance.associations[key]" ng-options="inst.model.id as inst.name for inst in value.targetInstances" size="6" multiple>
+                </select>
+                <button class="btn btn-mini btn-success"><i class="icon-plus"></i> New</button>
+            </div>
+            <div class="controls" ng-switch-default>
+                <select class="input-xlarge" name="{{ key }}" ng-model="instance.model[value.identifier]" ng-options="inst.model.id as inst.name for inst in value.targetInstances">
                     <option value="">-----</option>
                 </select>
                 <button class="btn btn-mini btn-success"><i class="icon-plus"></i> New</button>
