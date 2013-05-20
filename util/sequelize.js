@@ -5,45 +5,51 @@
 //----------------------------------------------------------------------------------------------------------------------
 
 var path = require('path');
+var app = require('../omega').app;
+
+var package = require(path.resolve('./package.json'));
+
+// Override the main function.
+app.init(function()
+{
+    app.setMainFunc(function(){});
+});
+
+// Require the main omega app file
+require(path.resolve('./' + package.main));
 
 //----------------------------------------------------------------------------------------------------------------------
 
 
-function dump(manager, filename)
+function dump(filename)
 {
-    //FIXME: We can't require them to always put the models in the same place!
-    require(path.resolve('./models'));
-
     filename = filename || "./dump.js";
+    var db = require('../omega').db;
 
-    for(var dbName in manager.databases)
+    for(var dbName in db.databases)
     {
         console.log('Dumping database \'%s\'.', dbName);
-        manager.dump(dbName, filename);
+        db.dump(dbName, filename);
     } // end for
 } // end dump
 
-function sync(manager)
+function sync()
 {
-    //FIXME: We can't require them to always put the models in the same place!
-    require(path.resolve('./models'));
-
-    for(var dbName in manager.databases)
+    var db = require('../omega').db;
+    for(var dbName in db.databases)
     {
         console.log('Syncing database \'%s\'.', dbName);
-        manager.databases[dbName].sync();
+        db.databases[dbName].sync();
     } // end for
 } // end sync
 
-function drop(manager)
+function drop()
 {
-    //FIXME: We can't require them to always put the models in the same place!
-    require(path.resolve('./models'));
-
-    for(var dbName in manager.databases)
+    var db = require('../omega').db;
+    for(var dbName in db.databases)
     {
         console.log('Droping database \'%s\'.', dbName);
-        manager.databases[dbName].drop();
+        db.databases[dbName].drop();
     } // end for
 } // end drop
 
