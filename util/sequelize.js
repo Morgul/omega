@@ -31,7 +31,6 @@ function sync(manager)
     for(var dbName in manager.databases)
     {
         console.log('Syncing database \'%s\'.', dbName);
-        manager.dump(dbName, './dump.js');
         manager.databases[dbName].sync();
     } // end for
 } // end sync
