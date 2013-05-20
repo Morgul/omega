@@ -176,7 +176,7 @@ function save(req, resp)
 {
     var post = req.body;
     var instance = post.model;
-    var associations = post.associations;
+    var associations = post.associations || {};
 
     var modelName = req.params.model;
     var modelID = req.params.id;
@@ -190,6 +190,7 @@ function save(req, resp)
                 {
                     // Update associations here.
                     var associationValues = [];
+
                     async.each(Object.keys(associations), function(aKey, callback)
                     {
                         async.each(associations[aKey], function(modelID, iCallback)
