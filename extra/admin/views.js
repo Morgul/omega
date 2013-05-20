@@ -42,7 +42,8 @@ function models(req, resp)
             var association = model.associations[aKey];
 
             associations.push({
-                name: association.options.as || aKey,
+                name: aKey,
+                as: association.options.as,
                 accessors: association.accessors,
                 target: {
                     name: association.target.name
@@ -138,9 +139,7 @@ function all_instances(req, resp)
                                         ids.push(inst.id);
                                     });
 
-                                    var name = association.options.as || aKey;
-
-                                    associations[name] = ids;
+                                    associations[aKey] = ids;
                                     callback();
                                 });
                             });
@@ -176,6 +175,9 @@ function all_instances(req, resp)
 function save(req, resp)
 {
     var post = req.body;
+    var instance = post.model;
+    var associations = post.associations;
+
     var modelName = req.params.model;
     var modelID = req.params.id;
 
@@ -183,12 +185,32 @@ function save(req, resp)
     db.model(modelName).findOrCreate({id: modelID})
         .success(function(model)
         {
-            model.updateAttributes(post)
+            model.updateAttributes(instance)
                 .success(function()
                 {
-                    logger.info('Successfully updated model.');
-                    resp.writeHead(200, { 'Content-Type': 'application/json' });
-                    resp.end(JSON.stringify({ model: model, options: model.daoFactory.options }));
+                    // Update associations here.
+                    var associationValues = [];
+                    async.each(Object.keys(associations), function(aKey, callback)
+                    {
+                        async.each(associations[aKey], function(modelID, iCallback)
+                        {
+                            db.model(model.daoFactory.associations[aKey].target.name).find(modelID).success(function(aModel)
+                            {
+                                associationValues.push(aModel);
+                                iCallback();
+                            });
+                        }, function()
+                        {
+                            model[model.daoFactory.associations[aKey].accessors.set](associationValues)
+                                .success(function(){ callback(); })
+                                .error(function(error){ callback(error); });
+                        });
+                    }, function()
+                    {
+                        logger.info('Successfully updated model.');
+                        resp.writeHead(200, { 'Content-Type': 'application/json' });
+                        resp.end(JSON.stringify({ model: model, options: model.daoFactory.options }));
+                    });
                 })
                 .error(function(error)
                 {

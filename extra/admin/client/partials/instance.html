@@ -26,7 +26,7 @@
         <hr/>
 
         <div class="control-group" ng-repeat="(key, value) in relations" ng-switch="value.associationType == 'HasMany'">
-            <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ key }}</label>
+            <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ value.as || key }}</label>
             <div class="controls "ng-switch-when="true">
                 <select class="input-xlarge" name="{{ key }}" ng-model="instance.associations[key]" ng-options="inst.model.id as inst.name for inst in value.targetInstances" size="6" multiple>
                 </select>

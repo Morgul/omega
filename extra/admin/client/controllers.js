@@ -118,7 +118,8 @@ Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $lo
 
     $scope.save = function(stay)
     {
-        $http.post(adminUrl('/models/' + modelName + '/' + modelID), $scope.instance.model)
+        $http.post(adminUrl('/models/' + modelName + '/' + modelID),
+            { model: $scope.instance.model, associations:$scope.instance.associations })
             .success(function(data, status)
             {
                 if(!stay)
@@ -197,7 +198,8 @@ Controllers.controller("NewInstanceCtrl", function($scope, $routeParams, $http, 
 
     $scope.save = function(stay)
     {
-        $http.post(adminUrl('/models/' + modelName), $scope.instance.model)
+        $http.post(adminUrl('/models/' + modelName),
+            { model: $scope.instance.model, associations:$scope.instance.associations })
             .success(function(data, status)
             {
                 console.log('got data:', data);
