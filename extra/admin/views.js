@@ -140,7 +140,8 @@ function save(req, resp)
                 .success(function()
                 {
                     logger.info('Successfully updated model.');
-                    resp.end();
+                    resp.writeHead(200, { 'Content-Type': 'application/json' });
+                    resp.end(JSON.stringify({ model: model, options: model.daoFactory.options }));
                 })
                 .error(function(error)
                 {
@@ -151,11 +152,40 @@ function save(req, resp)
         })
         .error(function(error)
         {
-            logger.error("Error finding model: \n%s", error);
+            logger.error("Error finding model (for save): \n%s", error);
             resp.writeHead(500);
-            resp.end('Error finding model: ' + error.toString());
+            resp.end('Error finding model (for save): ' + error.toString());
         });
 } // end save
+
+function remove(req, resp)
+{
+    var modelName = req.params.model;
+    var modelID = req.params.id;
+
+    var db = require('../../omega').db;
+    db.model(modelName).find(modelID)
+        .success(function(model)
+        {
+            model.destroy()
+                .success(function()
+                {
+                    resp.end();
+                })
+                .error(function(error)
+                {
+                    logger.error("Error deleting model: \n%s", error);
+                    resp.writeHead(500);
+                    resp.end('Error deleting model: ' + error.toString());
+                });
+        })
+        .error(function(error)
+        {
+            logger.error("Error deleting model: \n%s", error);
+            resp.writeHead(500);
+            resp.end('Error deleting model: ' + error.toString());
+        });
+}
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -164,7 +194,8 @@ module.exports = {
     models: models,
     instance: instance,
     all_instances: all_instances,
-    save: save
+    save: save,
+    delete: remove
 }; // end exports
 
 //----------------------------------------------------------------------------------------------------------------------

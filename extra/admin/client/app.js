@@ -11,6 +11,7 @@ angular.module("omega.admin", ['ngResource', 'omega.admin.controllers'])
         $routeProvider
             .when('/', {templateUrl: partialUrl('index.html'),   controller: 'IndexCtrl'})
             .when('/:model', {templateUrl: partialUrl('model.html'),   controller: 'ModelCtrl'})
+            .when('/:model/!new', {templateUrl: partialUrl('instance.html'),   controller: 'NewInstanceCtrl'})
             .when('/:model/:instance', {templateUrl: partialUrl('instance.html'),   controller: 'InstanceCtrl'})
             .otherwise({redirectTo: '/'});
     }])

@@ -8,7 +8,7 @@
         <tr ng-repeat="model in models">
             <td class="expand"><a href="#/{{ model.name }}">{{ model.name }}</a></td>
             <td class="text-right shrink">
-                <button class="btn btn-mini btn-success"><i class="icon-plus"></i> Add</button>
+                <a href="#/{{model.name}}/!new" class="btn btn-mini btn-success"><i class="icon-plus"></i> Add</a>
                 <a href="#/{{ model.name }}" class="btn btn-mini btn-primary"><i class="icon-edit"></i> Edit</a>
             </td>
         </tr>

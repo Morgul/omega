@@ -25,12 +25,14 @@ function initialize()
     },
     {
         url: url + '/models/{model}',
-        get: views.all_instances
+        get: views.all_instances,
+        post: views.save
     },
     {
         url: url + '/models/{model}/{id}',
         get: views.instance,
-        post: views.save
+        post: views.save,
+        delete: views.delete
     },
     {
         url: url,
