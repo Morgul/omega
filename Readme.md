@@ -1,6 +1,11 @@
 # Omega Web Framework
 
-A web application framework that is designed to support realtime web applications simply and effectively.
+A web application framework that is designed to support realtime web applications simply and effectively. It takes a
+'batteries included, but optional' approach; it comes with a template language, database support, and an extensible
+authentication system, but you are not required to use any of that. It also provides a
+[django](https://www.djangoproject.com/)-like admin section that, when coupled with the built in database support,
+alows you to inspect, modify, and create instances of your models. ( _Note: this feature is very new, and very
+experimental; it is not recommended to use in production._ )
 
 ## Basic App
 
@@ -174,6 +179,24 @@ integrate it yourself, and you like working with SQL. (`sqlite` is still the def
 instances, which is why omega still defaults to sql over nosql solutions.)
 
 Example to come soon.
+
+## Admin Section
+
+Omega now has an admin section, which can be enabled by simple uncommenting the following lines from the settings file:
+
+```javascript
+omegaAdminUrl = '/admin';
+useOmegaAdmin = true;
+```
+
+As you can see, `omegaAdminUrl` allows you to control what url the admin section (and all it's associated static files,
+REST interface, etc) is served at. This is simply to give you greater flexibility.
+
+The admin section gives a very basic interface into your database, allowing you to easily create model instances, or
+modify values in the database.
+
+**Note:** Currently, the admin section has zero integration with the authentication system, and it gives complete access
+to your database, so _**do not**_ enable it on a production site!
 
 ## Initialization
 
