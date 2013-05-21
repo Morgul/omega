@@ -159,15 +159,15 @@ This makes is nice and straightforward to write `socket.io` code however you wis
 
 ## Authentication
 
-Omega has integration with [Passport]() for authentication. This can be accessed through `require('omega-wf').auth`. (_
-Note: This is one of the few pieces not wrapped in the omega app. This is because auth is considered optional._)
+Omega has integration with [Passport]() for authentication. This can be accessed through `require('omega-wf').auth`.
+( _Note: This is one of the few pieces not wrapped in the omega app. This is because auth is considered optional._ )
 
 Example to come soon.
 
 ## Databases
 
 Omega has integration with [Sequelize]() for database connectivity. This can be accessed through `require('omega-wf').db`.
-(_Note: This is one of the few pieces not wrapped in the omega app. This is because it is considered optional._)
+( _Note: This is one of the few pieces not wrapped in the omega app. This is because it is considered optional._ )
 
 It should be noted that you are still free to use any ORM you wish; we just provide one for you incase you don't want to
 integrate it yourself, and you like working with SQL. (`sqlite` is still the defacto development database in most
