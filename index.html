@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Omega by Morgul</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Morgul/omega">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/Morgul/omega/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/Morgul/omega/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Omega</h1>
+          <p>A web application framework for reatime applications.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Morgul">Morgul</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>Omega Web Framework</h1>
+
+<p>A web application framework that is designed to support realtime web applications simply and effectively. It takes a
+'batteries included, but optional' approach; it comes with a template language, database support, and an extensible
+authentication system, but you are not required to use any of that. It also provides a
+<a href="https://www.djangoproject.com/">django</a>-like admin section that, when coupled with the built in database support,
+alows you to inspect, modify, and create instances of your models. ( <em>Note: this feature is very new, and very
+experimental; it is not recommended to use in production.</em> )</p>
+
+<h2>Basic App</h2>
+
+<p>A basic omega application looks like this:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s1">'/static/*'</span><span class="p">,</span> <span class="nx">path</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'static'</span><span class="p">)});</span>
+
+<span class="c1">// Start the omega app.</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">();</span>
+
+</pre></div>
+
+<p>This tells omega to serve the <code>./static</code> folder statically at the url <code>/static/*</code>, and then starts listening for incomming
+connections. Admitedly, this isn't the most exciting application in the world, but it illustrates the basics of omega;
+first and foremost: <em>omega is simple</em>. It tries to make whatever you're doing as straightforward as possible, and hide
+any complexity from you.</p>
+
+<p>Second, this demonstrates a core concept of working with omega: <em>the app is king</em>. omega plication object provides
+an api into omega's functionality. Really, this should be intuitive for most people, but it's worth repeating.</p>
+
+<h2>Static File Serving</h2>
+
+<p>The basic example also included a basic example of static file serving. Omega supports as many static files as you would
+like, and handled directories, as well as individual files. To exand on the first example, we can also pass a list of
+directories to serve:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'path'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="nx">url</span><span class="o">:</span> <span class="s1">'/static/*'</span><span class="p">,</span>
+        <span class="nx">path</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'static'</span><span class="p">)</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nx">url</span><span class="o">:</span> <span class="s1">'/images/*'</span><span class="p">,</span>
+        <span class="nx">path</span><span class="o">:</span> <span class="s1">'/usr/share/images'</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nx">url</span><span class="o">:</span> <span class="s1">'/uploads/*'</span><span class="p">,</span>
+        <span class="nx">path</span><span class="o">:</span> <span class="s1">'/tmp/uploads'</span><span class="p">,</span>
+        <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">autoIndex</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="p">}</span>
+<span class="p">);</span>
+
+</pre></div>
+
+<p>The big difference between serving a static file, and serving a normal url route, is that omega looks for the <code>path</code> key
+and assumes that anything with <code>path</code> is a static file. As <code>path</code> is not a HTTP verb, I feel this is safe.</p>
+
+<h3>Options</h3>
+
+<p>Currently, the only option supported is <code>autoIndex</code>. If true, and the path requested is a directory, omega looks for an
+<code>index.html</code> file, and serves that, instead.</p>
+
+<h3>Security/Performance</h3>
+
+<p>Under the hood omega uses it's own custom static file router, which supports streaming. While the intention is for it to
+be usable in production, a dedicated static file server, like <a href="http://wiki.nginx.org/Main">nginx</a> will always be faster,
+and more secure.</p>
+
+<h2>URL Routing</h2>
+
+<p>Even though the focus of omega is on realtime web applications, there are reasons you may wish to do things a more
+traditional way, with server-side processing. Or, perhaps, you need to write a simple <code>REST</code> service. That's easily done
+with omega:</p>
+
+<div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">controllers</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./controllers'</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s1">'/'</span><span class="p">,</span> <span class="nx">get</span><span class="o">:</span> <span class="nx">controllers</span><span class="p">.</span><span class="nx">index</span><span class="p">});</span>
+
+</pre></div>
+
+<p>It also supports adding multiple paths, with multiple verbs at once:</p>
+
+<div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">controllers</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./controllers'</span><span class="p">);</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="nx">url</span><span class="o">:</span> <span class="s1">'/'</span><span class="p">,</span>
+        <span class="nx">get</span><span class="o">:</span> <span class="nx">controllers</span><span class="p">.</span><span class="nx">index</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="nx">path</span><span class="o">:</span> <span class="s1">'/blog'</span><span class="p">,</span>
+        <span class="nx">get</span><span class="o">:</span> <span class="nx">controllers</span><span class="p">.</span><span class="nx">blog_index</span><span class="p">,</span>
+        <span class="nx">post</span><span class="o">:</span> <span class="nx">controllers</span><span class="p">.</span><span class="nx">blog_new</span>
+    <span class="p">}</span>
+<span class="p">);</span>
+
+</pre></div>
+
+<p>The <code>url</code> parameter can be a regular expression, supporting capture groups:</p>
+
+<div class="highlight"><pre><span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span><span class="nx">url</span><span class="o">:</span> <span class="s1">'/blog/{slug}'</span><span class="p">,</span> <span class="nx">get</span><span class="o">:</span> <span class="nx">controllers</span><span class="p">.</span><span class="nx">blog</span><span class="p">});</span>
+</pre></div>
+
+<p>In the <code>controllers.blog</code> function, you can get the url parameter like this:</p>
+
+<div class="highlight"><pre><span class="kd">function</span><span class="p">(</span><span class="nx">request</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">slug</span> <span class="o">=</span> <span class="nx">request</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">slug</span><span class="p">;</span>
+
+    <span class="c1">// Your code here</span>
+    <span class="nx">response</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>This is all simply a wrapper around <a href="https://github.com/gett/router">gett/router</a>, with a bit of syntactic sugar. All
+HTTP verbs supported there are supported by omega.</p>
+
+<h2>Socket.io</h2>
+
+<p>One of the big things omega provides is <code>socket.io</code> functionality. We expose this in a very straightforward way:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'connection'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'news'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">hello</span><span class="o">:</span> <span class="s1">'world'</span> <span class="p">});</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'my other event'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>Since <code>socket.io</code> has a great, easy to understand api, we don't even bother to wrap it; we just take care of starting
+the server for you. (We don't expose the <code>io</code> object directly, as there's hardly any need. Should you need to use it,
+you can access it via <code>app._io</code>.)</p>
+
+<h3>Namespaces</h3>
+
+<p>We also expose socket.io's namespaces as <code>channels</code>:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">channels</span><span class="p">(</span><span class="s1">'/news'</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'connection'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">'item'</span><span class="p">,</span> <span class="p">{</span> <span class="nx">news</span><span class="o">:</span> <span class="s1">'item'</span> <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>This makes is nice and straightforward to write <code>socket.io</code> code however you wish.</p>
+
+<h2>Authentication</h2>
+
+<p>Omega has integration with <a href="">Passport</a> for authentication. This can be accessed through <code>require('omega-wf').auth</code>.
+( <em>Note: This is one of the few pieces not wrapped in the omega app. This is because auth is considered optional.</em> )</p>
+
+<p>Example to come soon.</p>
+
+<h2>Databases</h2>
+
+<p>Omega has integration with <a href="">Sequelize</a> for database connectivity. This can be accessed through <code>require('omega-wf').db</code>.
+( <em>Note: This is one of the few pieces not wrapped in the omega app. This is because it is considered optional.</em> )</p>
+
+<p>It should be noted that you are still free to use any ORM you wish; we just provide one for you incase you don't want to
+integrate it yourself, and you like working with SQL. (<code>sqlite</code> is still the defacto development database in most
+instances, which is why omega still defaults to sql over nosql solutions.)</p>
+
+<p>Example to come soon.</p>
+
+<h2>Admin Section</h2>
+
+<p>Omega now has an admin section, which can be enabled by simple uncommenting the following lines from the settings file:</p>
+
+<div class="highlight"><pre><span class="nx">omegaAdminUrl</span> <span class="o">=</span> <span class="s1">'/admin'</span><span class="p">;</span>
+<span class="nx">useOmegaAdmin</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div>
+
+<p>As you can see, <code>omegaAdminUrl</code> allows you to control what url the admin section (and all it's associated static files,
+REST interface, etc) is served at. This is simply to give you greater flexibility.</p>
+
+<p>The admin section gives a very basic interface into your database, allowing you to easily create model instances, or
+modify values in the database.</p>
+
+<p><strong>Note:</strong> Currently, the admin section has zero integration with the authentication system, and it gives complete access
+to your database, so <em><strong>do not</strong></em> enable it on a production site!</p>
+
+<h2>Initialization</h2>
+
+<p>Sometimes, you need to do some initialization that depends on the omega app having finished it's setup. For these cases,
+omega provides <code>app.init</code>:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// It is safe to work with app.config here.</span>
+<span class="p">});</span>
+
+<span class="c1">// It is not safe to work with app.config here.</span>
+
+</pre></div>
+
+<p>This is very useful if you want to split your app into several modules, some of which depend on configuration.</p>
+
+<h2>App Name</h2>
+
+<p>It's possible to set the name of your application:</p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'omega-wf'</span><span class="p">).</span><span class="nx">app</span><span class="p">;</span>
+
+<span class="nx">app</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="s2">"Some Really Cool App v2.0.1.adf23019w-pre7"</span><span class="p">);</span>
+</pre></div>
+
+<p>This is useful for logging, mostly. (But it might get used later. Suggestions welcome!)</p>
+
+<h2>Unit Tests</h2>
+
+<p>Tests can be run with:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>npm tests
+</pre></div>
+
+<h2>Installation</h2>
+
+<p>Simply install globally from npm:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>npm install -g omega-wf
+</pre></div>
+
+<p>This will get you the <code>omega-admin</code> script, with which you can start a new app:</p>
+
+<div class="highlight"><pre><span class="nv">$ </span>omega-admin startapp my_app
+</pre></div>
+
+<p>(You can also install it locally, but then you won't get the omega admin script.)</p>
+
+<h2>Work in Progress</h2>
+
+<p>This is a massive work in progress. Currently, I'm gearing up for a 1.0 release. The API is mostly stable, and I'm using
+it to develop some projects. As I find issues, I am documenting them with github issues, and then fixing them, so the
+issues list is a good idea of what doesn't work.</p>
+
+<p>At the moment, I would call it "beta quality", and wouldn't run it in production without doing some extensive testing. If,
+however, you are a brave soul, and are using it in production, let me know! The more feedback, the better.</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
