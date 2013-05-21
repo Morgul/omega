@@ -1,0 +1,12 @@
+<div modal="shouldBeOpen" close="close()" options="opts">
+    <div class="modal-header">
+        <h4>New {{ model.name }}</h4>
+    </div>
+    <div class="modal-body">
+        <div ng-include="partialUrl('fields.html')"></div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn cancel" ng-click="close()"><i class="icon-remove"></i> Cancel</button>
+        <button class="btn btn-primary" ng-click="save()"><i class="icon-save"></i> Save</button>
+    </div>
+</div>

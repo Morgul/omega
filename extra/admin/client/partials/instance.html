@@ -8,38 +8,7 @@
         </div>
     </div>
 
-    <form class="form-horizontal">
-        <div class="control-group" ng-repeat="field in fields" ng-init="key = field[0]; value= field[1]">
-            <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ key }}</label>
-            <div class="controls" ng-switch="value.type">
-                <input class="input-xxlarge" type="date" name="{{ key }}" ng-switch-when="DATETIME" ng-required="value.allowNull === false" ng-model="instance.model[key]">
-                <input class="input-xxlarge" type="number" name="{{ key }}" ng-switch-when="INTEGER" ng-required="value.allowNull === false" ng-model="instance.model[key]">
-                <textarea class="input-xxlarge" name="{{ key }}" ng-switch-when="TEXT" ng-required="value.allowNull === false" ng-model="instance.model[key]"></textarea>
-
-                <ng-switch ng-switch-default on="value.validate.isEmail">
-                    <input class="input-xxlarge" type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]">
-                    <input class="input-xxlarge" type="text" name="{{ key }}" ng-switch-default ng-required="value.allowNull === false" ng-model="instance.model[key]">
-                </ng-switch>
-            </div>
-        </div>
-
-        <hr/>
-
-        <div class="control-group" ng-repeat="(key, value) in relations" ng-switch="value.associationType == 'HasMany'">
-            <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ value.as || key }}</label>
-            <div class="controls "ng-switch-when="true">
-                <select class="input-xlarge" name="{{ key }}" ng-model="instance.associations[key]" ng-options="inst.model.id as inst.name for inst in value.targetInstances" size="6" multiple>
-                </select>
-                <button class="btn btn-mini btn-success"><i class="icon-plus"></i> New</button>
-            </div>
-            <div class="controls" ng-switch-default>
-                <select class="input-xlarge" name="{{ key }}" ng-model="instance.model[value.identifier]" ng-options="inst.model.id as inst.name for inst in value.targetInstances">
-                    <option value="">-----</option>
-                </select>
-                <button class="btn btn-mini btn-success"><i class="icon-plus"></i> New</button>
-            </div>
-        </div>
-    </form>
+    <div ng-include="partialUrl('fields.html')"></div>
 
     <hr/>
 

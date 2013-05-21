@@ -45,7 +45,7 @@ Controllers.controller("ModelCtrl", function($scope, $routeParams, $http, $locat
 
 //----------------------------------------------------------------------------------------------------------------------
 
-Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $location)
+Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $location, $dialog)
 {
     var modelID = $routeParams.instance;
     var modelName = $routeParams.model;
@@ -61,53 +61,18 @@ Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $lo
                 // Get the current instance
                 $scope.instance = _.find($scope.instances, function(instance){ return instance.model.id == modelID; });
 
-                //------------------------------------------------------------------------------------------------------
                 // Filter the fields object for display
-                //------------------------------------------------------------------------------------------------------
+                filterFields($scope);
 
-                // Filter out fields that we shouldn't show.
-                var skipFields = _.filter(_.keys($scope.model.fields), function(field)
-                {
-                    // If we're an autoIncrement field, or don't have a fieldIndex, don't show us.
-                    return $scope.model.fields[field].autoIncrement || !($scope.model.fields[field].fieldIndex)
-                });
-
-                // Remove the filtered fields
-                var fields = _.omit($scope.model.fields, skipFields);
-
-                // Split into key/value pairs so we can sort.
-                fields = _.pairs(fields);
-
-                // Sort fields
-                $scope.fields = _.sortBy(fields, "fieldIndex");
-
-                //------------------------------------------------------------------------------------------------------
                 // Build up the relations for display
-                //------------------------------------------------------------------------------------------------------
-
-                $scope.relations = {};
-
-                _.each($scope.model.relations, function(relation)
-                {
-                    $http.get(adminUrl('/models/' + relation.target.name))
-                        .success(function(data, status)
-                        {
-                            data.forEach(function(model, index)
-                            {
-                                data[index].name = getName(model, relation.target.name);
-                            });
-
-                            relation.targetInstances = data;
-                            $scope.relations[relation.name] = relation;
-                        })
-                        .error(function(data, status)
-                        {
-                            console.error('Error occurred getting target instances:', data, 'status:', status);
-                        });
-                });
+                buildRelations($scope, $http);
             } // end if
         });
     } // end if
+
+    //------------------------------------------------------------------------------------------------------
+    // Functions
+    //------------------------------------------------------------------------------------------------------
 
     $scope.getName = getName;
 
@@ -132,21 +97,145 @@ Controllers.controller("InstanceCtrl", function($scope, $routeParams, $http, $lo
                 console.error('Error occurred:', data, 'status:', status);
             });
     }; // end save
+
+    $scope.new = function(modelName, association)
+    {
+        var dialog = $dialog.dialog(
+            {
+                resolve: {
+                    model: function()
+                    {
+                        return _.find($scope.models, function(model){ return model.name == modelName; });
+                    },
+                    association: function()
+                    {
+                        return association;
+                    },
+                    parent: function()
+                    {
+                        return $scope;
+                    }
+                }
+            });
+
+        dialog.open(partialUrl('new_instance.html'), 'NewModalCtrl');
+    }; // end new
 });
 
 //----------------------------------------------------------------------------------------------------------------------
 
-Controllers.controller("NewInstanceCtrl", function($scope, $routeParams, $http, $location)
+Controllers.controller("NewInstanceCtrl", function($scope, $routeParams, $http, $location, $dialog)
 {
     var modelName = $routeParams.model;
     $scope.model = _.find($scope.models, function(model){ return model.name == modelName; });
 
-    $scope.instance = {model: {}, options: {}};
+    $scope.instance = {model: {}, associations: {}, options: {}};
 
     //------------------------------------------------------------------------------------------------------
+
     // Filter the fields object for display
+    filterFields($scope);
+
+    // Build up the relations for display
+    buildRelations($scope, $http);
+
+    //------------------------------------------------------------------------------------------------------
+    // Functions
     //------------------------------------------------------------------------------------------------------
 
+    $scope.getName = getName;
+
+    $scope.cancel = function()
+    {
+        $location.path('/' + modelName);
+    }; // end cancel
+
+    $scope.save = function(stay)
+    {
+        $http.post(adminUrl('/models/' + modelName),
+            { model: $scope.instance.model, associations:$scope.instance.associations })
+            .success(function(data, status)
+            {
+                if(!stay)
+                {
+                    $location.path('/' + modelName);
+                }
+                else
+                {
+                    $location.path('/' + modelName + '/' + data.model.id);
+                } // end if
+            })
+            .error(function(data, status)
+            {
+                console.error('Error occurred:', data, 'status:', status);
+            });
+    }; // end save
+
+    $scope.new = function(modelName, association)
+    {
+        var dialog = $dialog.dialog(
+            {
+                resolve: {
+                    model: function()
+                    {
+                        return _.find($scope.models, function(model){ return model.name == modelName; });
+                    },
+                    association: function()
+                    {
+                        return association;
+                    },
+                    parent: function()
+                    {
+                        return $scope;
+                    }
+                }
+            });
+
+        dialog.open(partialUrl('new_instance.html'), 'NewModalCtrl');
+    }; // end new
+}); // end NewInstanceCtrl
+
+//----------------------------------------------------------------------------------------------------------------------
+
+Controllers.controller("NewModalCtrl", function($scope, $http, dialog, model, parent, association)
+{
+    $scope.model = model;
+    $scope.instance = {model: {}, options: {}};
+    $scope.inModal = true;
+
+    // Filter the fields object for display
+    filterFields($scope);
+
+    // Build up the relations for display
+    buildRelations($scope, $http);
+
+    $scope.close = function()
+    {
+        dialog.close();
+    };
+
+    $scope.save = function()
+    {
+        $http.post(adminUrl('/models/' + model.name),
+            { model: $scope.instance.model, associations:$scope.instance.associations })
+            .success(function(data, status)
+            {
+                buildRelations(parent, $http);
+                parent.instance.associations[association].push(data.model.id);
+                dialog.close();
+            })
+            .error(function(data, status)
+            {
+                console.error('Error occurred:', data, 'status:', status);
+                dialog.close();
+            });
+    }; // end save
+}); // end NewModalCtrl
+
+//----------------------------------------------------------------------------------------------------------------------
+
+function filterFields($scope)
+{
     // Filter out fields that we shouldn't show.
     var skipFields = _.filter(_.keys($scope.model.fields), function(field)
     {
@@ -162,11 +251,10 @@ Controllers.controller("NewInstanceCtrl", function($scope, $routeParams, $http, 
 
     // Sort fields
     $scope.fields = _.sortBy(fields, "fieldIndex");
+} // end filterFields
 
-    //------------------------------------------------------------------------------------------------------
-    // Build up the relations for display
-    //------------------------------------------------------------------------------------------------------
-
+function buildRelations($scope, $http)
+{
     $scope.relations = {};
 
     _.each($scope.model.relations, function(relation)
@@ -187,40 +275,7 @@ Controllers.controller("NewInstanceCtrl", function($scope, $routeParams, $http, 
                 console.error('Error occurred getting target instances:', data, 'status:', status);
             });
     });
-
-
-    $scope.getName = getName;
-
-    $scope.cancel = function()
-    {
-        $location.path('/' + modelName);
-    }; // end cancel
-
-    $scope.save = function(stay)
-    {
-        $http.post(adminUrl('/models/' + modelName),
-            { model: $scope.instance.model, associations:$scope.instance.associations })
-            .success(function(data, status)
-            {
-                console.log('got data:', data);
-                if(!stay)
-                {
-                    $location.path('/' + modelName);
-                }
-                else
-                {
-                    $location.path('/' + modelName + '/' + data.model.id);
-                } // end if
-            })
-            .error(function(data, status)
-            {
-                console.error('Error occurred:', data, 'status:', status);
-            });
-    }; // end save
-}); // end NewInstanceCtrl
-
-
-//----------------------------------------------------------------------------------------------------------------------
+} // end buildRelations
 
 function getInstances($scope, $http, modelName, callback)
 {

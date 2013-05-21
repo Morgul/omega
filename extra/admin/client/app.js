@@ -4,9 +4,13 @@
 // @module app.js
 //----------------------------------------------------------------------------------------------------------------------
 
-angular.module("omega.admin", ['ngResource', 'omega.admin.controllers'])
-    .config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider)
+angular.module("omega.admin", ['ngResource', 'ui.bootstrap.dialog', 'omega.admin.controllers'])
+    .config(['$routeProvider', '$locationProvider', '$dialogProvider', function($routeProvider, $locationProvider, $dialogProvider)
     {
+        $dialogProvider.options({
+            backdropFade: true
+        });
+
         //$locationProvider.html5Mode(true);
         $routeProvider
             .when('/', {templateUrl: partialUrl('index.html'),   controller: 'IndexCtrl'})
