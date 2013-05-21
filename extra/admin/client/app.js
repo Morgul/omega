@@ -43,6 +43,17 @@ angular.module("omega.admin", ['ngResource', 'ui.bootstrap.dialog', 'omega.admin
         {
             return window.adminUrl(url);
         }; // end partialUrl
-    }]);
+    }])
+    .filter('saneType', function () {
+        return function (type) {
+            if(_.isObject(type))
+            {
+                // This is weird, but Enums do this. So, we try returning the type from the type. \o/ Hurray!
+                return type.type;
+            }
+
+            return type;
+        };
+    });
 
 //----------------------------------------------------------------------------------------------------------------------
