@@ -2,16 +2,16 @@
     <div class="control-group" ng-repeat="field in fields" ng-init="key = field[0]; value= field[1]">
         <label class="control-label" for="{{ key }}" ng-class="{ required: value.allowNull === false }">{{ key }}</label>
         <div class="controls" ng-switch="value.type|saneType">
-            <input class="input-xxlarge" type="date" name="{{ key }}" ng-switch-when="DATETIME" ng-required="value.allowNull === false" ng-model="instance.model[key]">
-            <input class="input-xxlarge" type="number" name="{{ key }}" ng-switch-when="INTEGER" ng-required="value.allowNull === false" ng-model="instance.model[key]">
-            <textarea class="input-xxlarge" name="{{ key }}" ng-switch-when="TEXT" ng-required="value.allowNull === false" ng-model="instance.model[key]"></textarea>
-            <select class="input-xlarge" name="{{ key }}" ng-switch-when="ENUM" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-options="choice for choice in value.choices">
+            <input class="input-xxlarge" type="date" name="{{ key }}" ng-switch-when="DATETIME" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
+            <input class="input-xxlarge" type="number" name="{{ key }}" ng-switch-when="INTEGER" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
+            <textarea class="input-xxlarge" name="{{ key }}" ng-switch-when="TEXT" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue"></textarea>
+            <select class="input-xlarge" name="{{ key }}" ng-switch-when="ENUM" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-options="choice for choice in value.choices" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
                 <option value="">-----</option>
             </select>
 
             <ng-switch ng-switch-default on="value.validate.isEmail">
-                <input class="input-xxlarge" type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]">
-                <input class="input-xxlarge" type="text" name="{{ key }}" ng-switch-default ng-required="value.allowNull === false" ng-model="instance.model[key]">
+                <input class="input-xxlarge" type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
+                <input class="input-xxlarge" type="text" name="{{ key }}" ng-switch-default ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
             </ng-switch>
         </div>
     </div>
