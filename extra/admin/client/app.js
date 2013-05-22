@@ -44,15 +44,48 @@ angular.module("omega.admin", ['ngResource', 'ui.bootstrap.dialog', 'omega.admin
             return window.adminUrl(url);
         }; // end partialUrl
     }])
-    .filter('saneType', function () {
+    .filter('saneType', function ()
+    {
         return function (type) {
             if(_.isObject(type))
             {
                 // This is weird, but Enums do this. So, we try returning the type from the type. \o/ Hurray!
                 return type.type;
-            }
+            } // end if
 
             return type;
+        };
+    })
+    .filter('modelGroups', function()
+    {
+        return function(models)
+        {
+            var groups = [];
+            _.each(models, function(model)
+            {
+                if(model.options.group)
+                {
+                    groups.push(model.options.group);
+                } // end if
+            });
+
+            return _.uniq(groups);
+        }; // end function
+    })
+    .filter('matchGroup', function()
+    {
+        return function(models, group)
+        {
+            var _models = [];
+            _.each(models, function(model)
+            {
+                if(model.options.group == group)
+                {
+                    _models.push(model);
+                } // end if
+            });
+
+            return _models;
         };
     });
 

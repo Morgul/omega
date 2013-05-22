@@ -56,6 +56,7 @@ function models(req, resp)
         modelDefs.push({
             name: model.name,
             fields: model.rawAttributes,
+            options: model.options,
             relations: associations
         });
     });
