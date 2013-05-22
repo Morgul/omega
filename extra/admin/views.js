@@ -182,50 +182,70 @@ function save(req, resp)
     var modelID = req.params.id;
 
     var db = require('../../omega').db;
-    db.model(modelName).findOrCreate({id: modelID})
-        .success(function(model)
-        {
-            model.updateAttributes(instance)
-                .success(function()
-                {
-                    // Update associations here.
-                    var associationValues = [];
 
-                    async.each(Object.keys(associations), function(aKey, callback)
+    if(modelID)
+    {
+        db.model(modelName).findOrCreate({id: modelID})
+            .success(function(model)
+            {
+                model.updateAttributes(instance)
+                    .success(function()
                     {
-                        async.each(associations[aKey], function(modelID, iCallback)
+                        // Update associations here.
+                        var associationValues = [];
+
+                        async.each(Object.keys(associations), function(aKey, callback)
                         {
-                            db.model(model.daoFactory.associations[aKey].target.name).find(modelID).success(function(aModel)
+                            async.each(associations[aKey], function(modelID, iCallback)
                             {
-                                associationValues.push(aModel);
-                                iCallback();
+                                db.model(model.daoFactory.associations[aKey].target.name).find(modelID).success(function(aModel)
+                                {
+                                    associationValues.push(aModel);
+                                    iCallback();
+                                });
+                            }, function()
+                            {
+                                model[model.daoFactory.associations[aKey].accessors.set](associationValues)
+                                    .success(function(){ callback(); })
+                                    .error(function(error){ callback(error); });
                             });
                         }, function()
                         {
-                            model[model.daoFactory.associations[aKey].accessors.set](associationValues)
-                                .success(function(){ callback(); })
-                                .error(function(error){ callback(error); });
+                            logger.info('Successfully updated model.');
+                            resp.writeHead(200, { 'Content-Type': 'application/json' });
+                            resp.end(JSON.stringify({ model: model, options: model.daoFactory.options }));
                         });
-                    }, function()
+                    })
+                    .error(function(error)
                     {
-                        logger.info('Successfully updated model.');
-                        resp.writeHead(200, { 'Content-Type': 'application/json' });
-                        resp.end(JSON.stringify({ model: model, options: model.daoFactory.options }));
+                        logger.error("Error saving model: \n%s", error);
+                        resp.writeHead(500);
+                        resp.end('Error saving model: ' + error.toString());
                     });
-                })
-                .error(function(error)
-                {
-                    logger.error("Error saving model: \n%s", error);
-                    resp.writeHead(500);
-                    resp.end('Error saving model: ' + error.toString());
-                });
-        })
-        .error(function(error)
-        {
-            logger.error("Error finding model (for save): \n%s", error);
-            resp.writeHead(500);
-            resp.end('Error finding model (for save): ' + error.toString());
-        });
+            })
+            .error(function(error)
+            {
+                logger.error("Error finding model (for save): \n%s", error);
+                resp.writeHead(500);
+                resp.end('Error finding model (for save): ' + error.toString());
+            });
+    }
+    else
+    {
+        db.model(modelName).create(instance)
+            .success(function(model)
+            {
+                logger.info('Successfully created model.');
+                resp.writeHead(200, { 'Content-Type': 'application/json' });
+                resp.end(JSON.stringify({ model: model, options: model.daoFactory.options }));
+            })
+            .error(function(error)
+            {
+                logger.error("Error creating model: \n%s", error);
+                resp.writeHead(500);
+                resp.end('Error creating model: ' + error.toString());
+            });
+    } // end if
 } // end save
 
 function remove(req, resp)

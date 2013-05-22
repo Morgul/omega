@@ -221,7 +221,16 @@ Controllers.controller("NewModalCtrl", function($scope, $http, dialog, model, pa
             .success(function(data, status)
             {
                 buildRelations(parent, $http);
-                parent.instance.associations[association].push(data.model.id);
+                var associations = parent.instance.associations[association];
+                if(angular.isArray(associations))
+                {
+                    parent.instance.associations[association].push(data.model.id);
+                }
+                else
+                {
+                    parent.instance.associations[association] = data.model.id;
+                } // end if
+
                 dialog.close();
             })
             .error(function(data, status)
