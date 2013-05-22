@@ -104,3 +104,10 @@ input
 }
 
 
+.muted.help
+{
+    font-size: 10px;
+    color: #aaa;
+    margin-left: 5px;
+}
+

@@ -13,6 +13,7 @@
                 <input class="input-xxlarge" type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
                 <input class="input-xxlarge" type="text" name="{{ key }}" ng-switch-default ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
             </ng-switch>
+            <p class="muted help" ng-show="value.helpText">{{ value.helpText }}</p>
         </div>
     </div>
 
