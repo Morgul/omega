@@ -8,6 +8,7 @@
             <select class="input-xlarge" name="{{ key }}" ng-switch-when="ENUM" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-options="choice for choice in value.choices" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
                 <option value="">-----</option>
             </select>
+            <input class="input-xxlarge" type="checkbox" name="{{ key }}" ng-switch-when="TINYINT(1)" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
 
             <ng-switch ng-switch-default on="value.validate.isEmail">
                 <input class="input-xxlarge" type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
