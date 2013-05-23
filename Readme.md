@@ -155,7 +155,7 @@ We also expose socket.io's namespaces as `channels`:
 ```javascript
 var app = require('omega-wf').app;
 
-app.channels('/news').on('connection', function (socket) {
+app.channel('/news').on('connection', function (socket) {
     socket.emit('item', { news: 'item' });
 });
 ```
