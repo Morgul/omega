@@ -30,7 +30,7 @@ function models(req, resp)
     resp.writeHead(200, { 'Content-Type': 'application/json' });
 
     //TODO: Handle more than just default?
-    var models = db.models['default'];
+    var models = db.models['default'] || {};
     var modelDefs = [];
     Object.keys(models).forEach(function(key)
     {
@@ -75,8 +75,6 @@ function instance(req, resp)
         {
             if(model != null)
             {
-                console.log('sup?');
-
                 // Pull HasMany associations
                 Object.keys(db.model(modelName).associations).forEach(function(aKey)
                 {
