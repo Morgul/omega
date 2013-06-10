@@ -10,9 +10,13 @@
             </select>
             <input class="input-xxlarge" type="checkbox" name="{{ key }}" ng-switch-when="TINYINT(1)" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
 
-            <ng-switch ng-switch-default on="value.validate.isEmail">
-                <input class="input-xxlarge" type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
-                <input class="input-xxlarge" type="text" name="{{ key }}" ng-switch-default ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
+            <ng-switch ng-switch-default on="value.subType">
+                <input class="input-xxlarge" type="text" name="{{ key }}" ng-switch-when="slug" ng-required="value.allowNull === false" slugify="instance.model[value.field]" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
+
+                <ng-switch ng-switch-default on="value.validate.isEmail">
+                    <input class="input-xxlarge" type="email" name="{{ key }}" ng-switch-when="true" ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
+                    <input class="input-xxlarge" type="text" name="{{ key }}" ng-switch-default ng-required="value.allowNull === false" ng-model="instance.model[key]" ng-init="instance.model[key] = instance.model[key] || value.defaultValue">
+                </ng-switch>
             </ng-switch>
             <p class="muted help" ng-show="value.helpText">{{ value.helpText }}</p>
         </div>

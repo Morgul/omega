@@ -4,7 +4,7 @@
 // @module app.js
 //----------------------------------------------------------------------------------------------------------------------
 
-angular.module("omega.admin", ['ngResource', 'ui.bootstrap.dialog', 'omega.admin.controllers'])
+angular.module("omega.admin", ['ngResource', 'ui.bootstrap.dialog', 'omega.admin.controllers', 'omega.admin.directives'])
     .config(['$routeProvider', '$locationProvider', '$dialogProvider', function($routeProvider, $locationProvider, $dialogProvider)
     {
         $dialogProvider.options({
