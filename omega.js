@@ -22,6 +22,7 @@ module.exports = {
     auth: auth,
     db: require('./lib/database').createDbMan(app.config),
     utils: {
+        swig: require('swig'),
         render: render,
         dump: function()
         {
