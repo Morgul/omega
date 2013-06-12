@@ -21,14 +21,14 @@
         "omega-logger": "git+https://github.com/Morgul/omega-logger.git"
     },
     "devDependencies": {
-        "vows": "latest"
+        "mocha": "latest"
     },
     "main": "omega.js",
     "bin": {
         "omega-admin": "./scripts/omega-admin.js"
     },
     "scripts": {
-        "test": "vows tests/* --spec"
+        "test": "./node_modules/.bin/mocha tests --reporter spec"
     },
     "repository": {
         "type" : "git",
