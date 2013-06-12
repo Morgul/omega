@@ -16,17 +16,25 @@ function Page(contents, config)
 Page.prototype = {
     get has_next()
     {
-        return this.next_page_number != this.pageNum
+        return this.next_page != this.pageNum
     },
     get has_previous()
     {
-        return this.prev_page_number != this.pageNum
+        return this.prev_page != this.pageNum
     },
     get has_other_pages()
     {
         return this.paginator.num_pages > 1;
     },
     get next_page_number()
+    {
+        return this.next_page;
+    },
+    get previous_page_number()
+    {
+        return this.prev_page;
+    },
+    get next_page()
     {
         var nextNum = this.pageNum + 1;
         var num_pages = this.paginator.num_pages;
@@ -39,7 +47,7 @@ Page.prototype = {
 
         return nextNum;
     },
-    get prev_page_number()
+    get prev_page()
     {
         var prevNum = this.pageNum - 1;
 
