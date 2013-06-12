@@ -8,6 +8,7 @@ var App = require('./lib/app').App;
 var AuthMan = require('./lib/auth').Auth;
 
 var render = require('./util/swig').render;
+var Paginator = require('./util/paginator');
 
 // Create a new omega-wf application
 var app = new App();
@@ -25,6 +26,7 @@ module.exports = {
     utils: {
         swig: require('swig'),
         render: render,
+        Paginator: Paginator,
         dump: function()
         {
             var sequelize = require('./util/sequelize');
