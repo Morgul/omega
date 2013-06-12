@@ -7,7 +7,7 @@
 var vows = require('vows');
 var assert = require('assert');
 
-var omega-wf = require('../omega');
+var omega = require('../omega');
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -17,12 +17,12 @@ vows.describe("omega-wf")
         {
             'has an `app` property':
             {
-                topic: omega-wf.app,
+                topic: omega.app,
                 'that is defined': function(topic)
                 {
                     assert.isDefined(topic);
                 },
-                'that is an instance of omega-wfApp': function(topic)
+                'that is an instance of omegaApp': function(topic)
                 {
                     assert.instanceOf(topic, require('../lib/app').App);
                 }

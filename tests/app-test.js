@@ -11,7 +11,6 @@ var assert = require('assert');
 
 var socketio = require('socket.io');
 
-var Static = require('../lib/static').Static;
 var Router = require('../lib/router').Router;
 var App = require('../lib/app').App;
 
@@ -35,12 +34,6 @@ vows.describe("App")
                     var inst = new App();
 
                     assert.instanceOf(inst.router, Router);
-                },
-                'that has a static manager': function(topic)
-                {
-                    var inst = new App();
-
-                    assert.instanceOf(inst.static, Static);
                 },
                 'that exposes socket.io': function(topic)
                 {
