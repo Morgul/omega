@@ -80,7 +80,7 @@ function createApp(appName)
         smpltmpl.templateFile('server.js', appTemplateDir, appPath, context);
         smpltmpl.templateFile('settings.js', appTemplateDir, appPath, context);
         smpltmpl.templateFile('package.json', appTemplateDir, appPath, context);
-        smpltmpl.templateFile('README.md', appTemplateDir, appPath, context);
+        smpltmpl.templateFile('Readme.md', appTemplateDir, appPath, context);
 
         logger.info("Successfully created %s application.", appName);
     });
