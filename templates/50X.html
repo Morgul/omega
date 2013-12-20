@@ -1,19 +1,11 @@
 {% extends base %}
 
 {% block content %}
-<div class="navbar navbar-static-top">
-    <div class="navbar-inner">
-        <div class="row-fluid">
-            <span class="brand span12 text-center">{{ error }}</span>
-        </div>
-    </div>
-</div>
-
 <div style="margin-top: 10px;">&nbsp;</div>
 
 <div class="container">
-    <div class="hero-unit">
-        <h1><i class="icon-warning-sign"></i> {{ error }}</h1>
+    <div class="jumbotron">
+        <h1><i class="fa fa-warning"></i> {{ error }}</h1>
         {% if DEBUG %}
         <p>An internal error has occured: <span class="mono">{{ message }}</span></p>
         {% else %}
@@ -22,7 +14,7 @@
     </div>
 
     {% if DEBUG %}
-    <h4><i class="icon-code"></i> Stack Trace:</h4>
+    <h4><i class="fa fa-code"></i> Stack Trace:</h4>
     <div class="well trace">
         {{ trace }}
     </div>

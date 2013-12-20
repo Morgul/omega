@@ -20,8 +20,8 @@
  - Make sure it's simple, clean, and works as expected.
 
 ## Static
- - We really shouldn't be shipping our own static files with omega. Most projects will want their own versions; our templates can use a cdn for the files they need.
- - Update to the latest bootstrap, with our own theme.
+ - ~~We really shouldn't be shipping our own static files with omega. Most projects will want their own versions; our templates can use a cdn for the files they need.~~
+ - ~~Update to the latest bootstrap, with our own theme.~~
 
 ## App
  - We need to clean up the app code so that it's lighter weight, and so that you don't have to import `omega-wf` everywhere. The API could really stand to be improved.
