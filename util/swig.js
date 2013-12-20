@@ -18,17 +18,6 @@ function render(response, template, context, internal)
     if(internal)
     {
         template = omegaPath(template);
-
-        if(!context['base'])
-        {
-            context['base'] = omegaPath("base.html");
-        } // end if
-    } // end if
-
-    // Check to see if the user has overridden 'static'. If not, add the path to the omega static files.
-    if(!context['static'])
-    {
-        context['static'] = app.omegaStaticUrl;
     } // end if
 
     // Check to see if the user has overridden 'DEBUG'. If not, add the app.config.DEBUG flag.
@@ -37,7 +26,7 @@ function render(response, template, context, internal)
         context['DEBUG'] = app.config.DEBUG;
     } // end if
 
-    response.end(swig.compileFile(template).render(context));
+    response.end(swig.renderFile(template, context));
 } // end render
 
 function omegaPath(template)

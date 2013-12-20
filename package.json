@@ -1,41 +1,41 @@
 {
-    "name": "omega-wf",
-    "version": "0.9.12",
-    "description": "A web application framework based on socket.io and angularjs.",
-    "dependencies": {
-        "mime": "latest",
-        "commander": "1.1.1",
-        "xregexp": "latest",
-        "socket.io": "0.9.14",
-        "router": "0.6.2",
-        "swig": "~0.14.0",
-        "connect": "latest",
-		"connect-redirection": "latest",
-        "passport": "latest",
-        "async": "latest",
-        "passport.socketio": "git+https://github.com/Morgul/passport.socketio.git",
-        "omega-logger": "git+https://github.com/Morgul/omega-logger.git"
-    },
-    "devDependencies": {
-        "mocha": "latest"
-    },
-    "main": "omega.js",
-    "bin": {
-        "omega-admin": "./scripts/omega-admin.js"
-    },
-    "scripts": {
-        "test": "./node_modules/.bin/mocha tests --reporter spec"
-    },
-    "repository": {
-        "type" : "git",
-        "url" : "https://github.com/Morgul/omega.git"
-    },
-    "keywords": [
-        "node",
-        "socket.io",
-        "angularjs",
-        "rest"
-    ],
-    "author": "Christopher S. Case <chris.case@g33xnexus.com>",
-    "license": "MIT"
+  "name": "omega-wf",
+  "version": "0.9.12",
+  "description": "A web application framework based on socket.io and angularjs.",
+  "dependencies": {
+    "mime": "latest",
+    "commander": "1.1.1",
+    "xregexp": "latest",
+    "socket.io": "0.9.14",
+    "router": "0.6.2",
+    "connect": "latest",
+    "connect-redirection": "latest",
+    "passport": "latest",
+    "async": "latest",
+    "passport.socketio": "git+https://github.com/Morgul/passport.socketio.git",
+    "omega-logger": "git+https://github.com/Morgul/omega-logger.git",
+    "swig": "~1.2.2"
+  },
+  "devDependencies": {
+    "mocha": "latest"
+  },
+  "main": "omega.js",
+  "bin": {
+    "omega-admin": "./scripts/omega-admin.js"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha tests --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Morgul/omega.git"
+  },
+  "keywords": [
+    "node",
+    "socket.io",
+    "angularjs",
+    "rest"
+  ],
+  "author": "Christopher S. Case <chris.case@g33xnexus.com>",
+  "license": "MIT"
 }
