@@ -22,26 +22,10 @@ module.exports = {
     app: app,
     auth: auth,
     logging: require('./lib/logging'),
-    db: require('./lib/database').createDbMan(app.config),
     utils: {
         swig: require('swig'),
         render: render,
         Paginator: Paginator,
-        dump: function()
-        {
-            var sequelize = require('./util/sequelize');
-            sequelize.dump();
-        },
-        sync: function()
-        {
-            var sequelize = require('./util/sequelize');
-            sequelize.sync();
-        },
-        drop: function()
-        {
-            var sequelize = require('./util/sequelize');
-            sequelize.drop();
-        }
     }
 }; // end exports
 

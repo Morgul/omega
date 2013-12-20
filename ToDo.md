@@ -1,9 +1,11 @@
 # Omega ToDo:
 
 ## Project Cleanup
- - Remove the db support. (This is now provided by the optional omega-models project.)
- - Remove the admin section. (This will be provided in the future by a project that uses omega-models.)
+ - ~~Remove the db support. (This is now provided by the optional omega-models project.)~~
+ - ~~Remove the admin section. (This will be provided in the future by a project that uses omega-models.)~~
  - Upgrade to latest swig.
+ - Convert unit tests over to mocha.
+ - If there is a failure to start, we need to print an error, not simply exit.
 
 ## Project template
  - Have several project templates:
@@ -19,6 +21,7 @@
 
 ## Static
  - We really shouldn't be shipping our own static files with omega. Most projects will want their own versions; our templates can use a cdn for the files they need.
+ - Update to the latest bootstrap, with our own theme.
 
 ## App
  - We need to clean up the app code so that it's lighter weight, and so that you don't have to import `omega-wf` everywhere. The API could really stand to be improved.

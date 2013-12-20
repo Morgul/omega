@@ -26,18 +26,6 @@ listenPort = 8080;
 // Used for secure sessions. This should be unique per omega-wf application.
 secret = "{{ secret }}";
 
-// Uncomment to setup/configure databases
-//databases = {
-//    default: {
-//        engine: 'sqlite',
-//        database: './{{ app }}.db'
-//    }
-//};
-
-// Uncomment to enable the admin section
-//omegaAdminUrl = '/admin';
-//useOmegaAdmin = true;
-
 // Connect Middleware
 middleware = [
     // Standard connect middleware

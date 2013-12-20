@@ -12,10 +12,6 @@
         "connect": "latest",
 		"connect-redirection": "latest",
         "passport": "latest",
-        "sequelize": "latest",
-        "sqlite3": "~2.1.5",
-        "pg": "~0.10.2",
-        "mysql": "~2.0.0-alpha7",
         "async": "latest",
         "passport.socketio": "git+https://github.com/Morgul/passport.socketio.git",
         "omega-logger": "git+https://github.com/Morgul/omega-logger.git"

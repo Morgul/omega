@@ -1,7 +1,7 @@
 # Omega Web Framework
 
 A web application framework that is designed to support realtime web applications simply and effectively. It takes a
-'batteries included, but optional' approach; it comes with a template language, database support, and an extensible
+'batteries included, but optional' approach; it comes with a template language, and an extensible
 authentication system, but you are not required to use any of that. It also provides a
 [django](https://www.djangoproject.com/)-like admin section that, when coupled with the built in database support,
 alows you to inspect, modify, and create instances of your models. ( _Note: this feature is very new, and very
@@ -168,35 +168,6 @@ Omega has integration with [Passport]() for authentication. This can be accessed
 ( _Note: This is one of the few pieces not wrapped in the omega app. This is because auth is considered optional._ )
 
 Example to come soon.
-
-## Databases
-
-Omega has integration with [Sequelize]() for database connectivity. This can be accessed through `require('omega-wf').db`.
-( _Note: This is one of the few pieces not wrapped in the omega app. This is because it is considered optional._ )
-
-It should be noted that you are still free to use any ORM you wish; we just provide one for you incase you don't want to
-integrate it yourself, and you like working with SQL. (`sqlite` is still the defacto development database in most
-instances, which is why omega still defaults to sql over nosql solutions.)
-
-Example to come soon.
-
-## Admin Section
-
-Omega now has an admin section, which can be enabled by simple uncommenting the following lines from the settings file:
-
-```javascript
-omegaAdminUrl = '/admin';
-useOmegaAdmin = true;
-```
-
-As you can see, `omegaAdminUrl` allows you to control what url the admin section (and all it's associated static files,
-REST interface, etc) is served at. This is simply to give you greater flexibility.
-
-The admin section gives a very basic interface into your database, allowing you to easily create model instances, or
-modify values in the database.
-
-**Note:** Currently, the admin section has zero integration with the authentication system, and it gives complete access
-to your database, so _**do not**_ enable it on a production site!
 
 ## Initialization
 
