@@ -1,6 +1,6 @@
 {
   "name": "omega-wf",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "description": "A web application framework based on socket.io and angularjs.",
   "dependencies": {
     "mime": "latest",
