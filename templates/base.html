@@ -5,21 +5,33 @@
         <title>{% block title %}Omega{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="author" content="Christopher S. Case <chris.case@g33xnexus.com>">
 
         <!-- These scripts must be at the start of the page -->
-        <script src="{{ static|default('/omega') }}/vendor/jquery/jquery-2.0.0.min.js"></script>
-        <script src="{{ static|default('/omega') }}/vendor/underscore/underscore-min.js"></script>
+        <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
 
         <!-- Application Scripts -->
         {% block app_scripts %}{% endblock %}
 
         <!-- Vendor Styles -->
-        <link href="{{ static|default('/omega') }}/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
-        <link href="{{ static|default('/omega') }}/vendor/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <!--link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet"-->
+        <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.3/spacelab/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
 
         <!-- Application Styles -->
-        <link href="{{ static|default('/omega') }}/css/omega.css" rel="stylesheet">
+        <style>
+            .trace, .mono
+            {
+                font-family: monospace;
+            }
+
+            .trace
+            {
+                font-size: 9pt;
+            }
+        </style>
+
         {% block app_styles %}{% endblock %}
 
         {% block extra_head %}{% endblock %}
@@ -32,7 +44,7 @@
 
         <!-- ======================================================================================================= -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="{{ static|default('/omega') }}/vendor/bootstrap/bootstrap.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
         <!-- ======================================================================================================= -->
     </body>
 </html>
