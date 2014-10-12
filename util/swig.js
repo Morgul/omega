@@ -8,6 +8,11 @@ var path = require('path');
 
 var swig = require('swig');
 
+// This might break people who try and use swig, but it's so old, at this point, it's better than crashing.
+swig.init({
+    root: path.join(__dirname, '../templates')
+});
+
 // ---------------------------------------------------------------------------------------------------------------------
 
 function render(response, template, context, internal)
@@ -26,7 +31,8 @@ function render(response, template, context, internal)
         context['DEBUG'] = app.config.DEBUG;
     } // end if
 
-    response.end(swig.renderFile(template, context));
+    var tpl = swig.compileFile(template);
+    response.end(tpl.render(context));
 } // end render
 
 function omegaPath(template)
