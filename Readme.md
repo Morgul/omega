@@ -23,7 +23,7 @@ app.listen();
 ```
 
 This tells omega to serve the `./static` folder statically at the url `/static/*`, and then starts listening for incomming
-connections. Admitedly, this isn't the most exciting application in the world, but it illustrates the basics of omega;
+connections. Admittedly, this isn't the most exciting application in the world, but it illustrates the basics of omega;
 first and foremost: _omega is simple_. It tries to make whatever you're doing as straightforward as possible, and hide
 any complexity from you.
 
